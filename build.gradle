@@ -1,0 +1,35 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
+    id 'application'
+}
+
+mainClassName = 'com.elements.jvmbygo.Main'
+
+group 'org.elements.jvmbykotlin'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.xenomachina:kotlin-argparser:2.0.7'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
+
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
+    testImplementation('org.jetbrains.kotlin:kotlin-test:1.6.0')
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+startScripts {
+    def gen = unixStartScriptGenerator
+    gen.template = resources.text.fromString(
+            gen.template.asString().replaceFirst('(?=\nDEFAULT_JVM_OPTS=.*?\n)') {
+                '\nJAVA_OPTS="\\$JAVA_OPTS "\'"-Dcom.xenomachina.argparser.programName=\\$0"\''
+            })
+
+    // TODO: do something similar for windowsStartScriptGenerator
+}
