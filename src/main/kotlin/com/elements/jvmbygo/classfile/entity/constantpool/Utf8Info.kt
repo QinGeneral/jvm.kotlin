@@ -15,6 +15,6 @@ class Utf8Info(tag: UShort, length: UShort, bytes: ByteArray) : BaseConstantPool
     }
 
     override fun toString(): String {
-        return "Utf8Info(length=$length, bytes=${String(bytes)}) ${super.toString()}"
+        return "Utf8Info(length=$length, bytes=${bytes.contentToString()}, value='$value')"
     }
 }

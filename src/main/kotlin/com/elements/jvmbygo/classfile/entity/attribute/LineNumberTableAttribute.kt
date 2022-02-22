@@ -1,6 +1,7 @@
 package com.elements.jvmbygo.classfile.entity.attribute
 
 import com.elements.jvmbygo.classfile.ClassReader
+import com.elements.jvmbygo.classfile.entity.AttributeInfo
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.12
@@ -18,7 +19,7 @@ class LineNumberTableAttribute(
     override val nameIndex: UShort,
     override val length: UInt,
     classReader: ClassReader,
-) : BaseAttributeItem(nameIndex, length) {
+) : AttributeInfo(nameIndex, length) {
     val lineNumberTableLength: UShort
     val lineNumberTable: ArrayList<LineNumberTableItem> = ArrayList()
 

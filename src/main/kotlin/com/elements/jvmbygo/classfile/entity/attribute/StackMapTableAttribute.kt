@@ -1,13 +1,14 @@
 package com.elements.jvmbygo.classfile.entity.attribute
 
 import com.elements.jvmbygo.classfile.ClassReader
+import com.elements.jvmbygo.classfile.entity.AttributeInfo
 
 //todo
 class StackMapTableAttribute(
     override val nameIndex: UShort,
     override val length: UInt,
     classReader: ClassReader,
-) : BaseAttributeItem(nameIndex, length) {
+) : AttributeInfo(nameIndex, length) {
     val numberOfEntries: UShort
     val entries: ArrayList<StackMapTableItem> = ArrayList()
 

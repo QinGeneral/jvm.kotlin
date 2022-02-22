@@ -1,26 +1,26 @@
 package com.elements.jvmbygo.classfile.entity
 
-import com.elements.jvmbygo.classfile.entity.attribute.BaseAttributeItem
+import com.elements.jvmbygo.classfile.ClassReader
+import com.elements.jvmbygo.classfile.entity.constantpool.ConstantPool
 
 open class FieldInfo(
-    accessFlags: UShort,
-    nameIndex: UShort,
-    descriptorIndex: UShort,
-    attributesCount: UShort,
-    attributes: ArrayList<BaseAttributeItem>
+    classReader: ClassReader,
+    cp: ConstantPool
 ) {
     val accessFlags: UShort
     val nameIndex: UShort
     val descriptorIndex: UShort
     val attributesCount: UShort
-    val attributes: ArrayList<BaseAttributeItem>
+    val attributes: ArrayList<AttributeInfo> = ArrayList()
 
     init {
-        this.accessFlags = accessFlags
-        this.nameIndex = nameIndex
-        this.descriptorIndex = descriptorIndex
-        this.attributesCount = attributesCount
-        this.attributes = attributes
+        accessFlags = classReader.readU2()
+        nameIndex = classReader.readU2()
+        descriptorIndex = classReader.readU2()
+        attributesCount = classReader.readU2()
+        for (j in 0 until attributesCount.toInt()) {
+            attributes.add(AttributeInfo.of(classReader, cp))
+        }
     }
 
     override fun toString(): String {

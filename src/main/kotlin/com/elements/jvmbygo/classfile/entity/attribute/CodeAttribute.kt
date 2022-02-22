@@ -1,6 +1,7 @@
 package com.elements.jvmbygo.classfile.entity.attribute
 
 import com.elements.jvmbygo.classfile.ClassReader
+import com.elements.jvmbygo.classfile.entity.AttributeInfo
 import com.elements.jvmbygo.classfile.entity.constantpool.ConstantPool
 
 class CodeAttribute(
@@ -8,7 +9,7 @@ class CodeAttribute(
     override val length: UInt,
     classReader: ClassReader,
     cp: ConstantPool
-) : BaseAttributeItem(nameIndex, length) {
+) : AttributeInfo(nameIndex, length) {
 
     val maxStack: UShort
     val maxLocals: UShort
@@ -17,7 +18,7 @@ class CodeAttribute(
     val exceptionTableLength: UShort
     val exceptionTable: ArrayList<ExceptionTableItem> = ArrayList()
     val attributeCount: UShort
-    val attributes: ArrayList<BaseAttributeItem> = ArrayList()
+    val attributes: ArrayList<AttributeInfo> = ArrayList()
 
     init {
         maxStack = classReader.readU2()

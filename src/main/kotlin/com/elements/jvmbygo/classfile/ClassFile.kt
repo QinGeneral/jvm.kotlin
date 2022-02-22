@@ -1,11 +1,16 @@
 package com.elements.jvmbygo.classfile
 
 import com.elements.jvmbygo.classfile.entity.*
-import com.elements.jvmbygo.classfile.entity.attribute.Attribute
-import com.elements.jvmbygo.classfile.entity.attribute.BaseAttributeItem
-import com.elements.jvmbygo.classfile.entity.attribute.CodeAttribute
 import com.elements.jvmbygo.classfile.entity.constantpool.*
 
+/**
+ * ClassFile from .class file.
+ *
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.1">ClassFile</a>
+ *
+ * @author hanzhang
+ * @since 2022-02-20
+ */
 class ClassFile {
     // u4
     lateinit var magic: String
@@ -48,11 +53,7 @@ class ClassFile {
     // u2
     var attributesCount: UShort = 0u
 
-    var attributes: ArrayList<AttributesInfoItem> = ArrayList()
-
-    inner class AttributesInfoItem {
-
-    }
+    var attributes: ArrayList<AttributeInfo> = ArrayList()
 
     fun parse(classData: ByteArray) {
         val classReader = ClassReader(classData)
@@ -68,6 +69,17 @@ class ClassFile {
         parseInterfaces(classReader)
         parseFields(classReader)
         parseMethods(classReader)
+        parseAttributes(classReader)
+    }
+
+    private fun parseAttributes(classReader: ClassReader) {
+        attributesCount = classReader.readU2()
+        println("attributes count $attributesCount")
+        for (i in 0 until attributesCount.toInt()) {
+            val item = AttributeInfo.of(classReader, constantPool)
+            println("attributes item $item")
+            attributes.add(item)
+        }
     }
 
     private fun parserVersion(classReader: ClassReader) {
@@ -99,7 +111,7 @@ class ClassFile {
         methodsCount = classReader.readU2()
         println("methodsCount count $methodsCount")
         for (i in 0 until methodsCount.toInt()) {
-            val item = MethodInfo.of(classReader, constantPool)
+            val item = MethodInfo(classReader, constantPool)
             methods.add(item)
             println(item.toString() + " " + i + " " + methods.size)
         }
@@ -109,21 +121,7 @@ class ClassFile {
         fieldsCount = classReader.readU2()
         println("fieldsCount count $fieldsCount")
         for (i in 0 until fieldsCount.toInt()) {
-            val accessFlags = classReader.readU2()
-            val nameIndex = classReader.readU2()
-            val descriptorIndex = classReader.readU2()
-            val attributesCount = classReader.readU2()
-            val attributes: ArrayList<BaseAttributeItem> = ArrayList()
-            for (j in 0 until attributesCount.toInt()) {
-                val attrNameIndex = classReader.readU2()
-                val attrName = attrNameIndex.toString()
-                val attrLength = classReader.readU4()
-                if (attrName == "Code") {
-                    val attributeItem = CodeAttribute(attrNameIndex, attrLength, classReader, constantPool)
-                    attributes.add(attributeItem)
-                }
-            }
-            val item = FieldInfo(accessFlags, nameIndex, descriptorIndex, attributesCount, attributes)
+            val item = FieldInfo(classReader, constantPool)
             fieldsInfo.add(item)
             println(item.toString() + " " + i + " " + fieldsInfo.size)
         }

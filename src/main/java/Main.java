@@ -4,6 +4,22 @@ class Main implements IMain {
         int b = 1;
     }
 
+    @Deprecated
+    public void testDeprecated() throws Exception {
+        Inner inner = new Inner();
+        inner.doSomething();
+    }
+
+    private class Inner {
+        private Inner() {
+        }
+
+        private void doSomething() {
+        }
+    }
+
+    int test = Integer.MAX_VALUE / 2;
+    int test1 = Integer.MAX_VALUE / 2;
     boolean bool = true;
     byte by = 123;
     char ch = 'a';
@@ -13,7 +29,7 @@ class Main implements IMain {
     float pi = 3.14f;
     double e = 2.71828;
 
-    public static String b = "abcd";
+    public static final String b = "abcd";
 
     public static void main(String[] args) {
         System.out.println("hello world");

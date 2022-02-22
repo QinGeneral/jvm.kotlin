@@ -1,7 +1,7 @@
 package com.elements.jvmbygo.classfile.entity.attribute
 
 import com.elements.jvmbygo.classfile.ClassReader
-import com.elements.jvmbygo.classfile.entity.constantpool.ConstantPool
+import com.elements.jvmbygo.classfile.entity.AttributeInfo
 
 /**
  *
@@ -22,7 +22,7 @@ class LocalVariableTableAttribute(
     override val nameIndex: UShort,
     override val length: UInt,
     classReader: ClassReader,
-) : BaseAttributeItem(nameIndex, length) {
+) : AttributeInfo(nameIndex, length) {
     val localVariableTableLength: UShort
     val localVariableTable: ArrayList<LocalVariableTableItem> = ArrayList()
 
