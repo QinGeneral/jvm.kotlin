@@ -1,7 +1,6 @@
 package com.elements.jvmbykotlin.classfile.entity.constantpool
 
 import com.elements.jvmbykotlin.classfile.ClassReader
-import java.lang.IllegalArgumentException
 
 class ConstantPool {
     var items: MutableMap<Int, BaseConstantPoolItem> = HashMap()

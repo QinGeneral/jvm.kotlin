@@ -1,3 +1,3 @@
 public interface IMain {
-    void test();
+    float test(float r);
 }

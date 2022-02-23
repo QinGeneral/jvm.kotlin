@@ -1,7 +1,15 @@
 class Main implements IMain {
     @Override
-    public void test() {
-        int b = 1;
+    public float test(float r) {
+        float pi = 3.14f;
+        float area = 2 * pi * r;
+        return area;
+    }
+
+    public static float area(float r) {
+        float pi = 3.14f;
+        float area = 2 * pi * r;
+        return area;
     }
 
     @Deprecated

@@ -1,7 +1,6 @@
 package com.elements.jvmbykotlin.classpath
 
 import java.io.File
-import java.lang.IllegalArgumentException
 import java.nio.file.Paths
 
 class Classpath(jrePathOption: String?, classpathOption: String?) {

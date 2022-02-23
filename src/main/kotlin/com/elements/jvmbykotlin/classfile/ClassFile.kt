@@ -1,7 +1,11 @@
 package com.elements.jvmbykotlin.classfile
 
-import com.elements.jvmbykotlin.classfile.entity.*
-import com.elements.jvmbykotlin.classfile.entity.constantpool.*
+import com.elements.jvmbykotlin.classfile.entity.AttributeInfo
+import com.elements.jvmbykotlin.classfile.entity.FieldInfo
+import com.elements.jvmbykotlin.classfile.entity.MethodInfo
+import com.elements.jvmbykotlin.classfile.entity.constantpool.ClassInfo
+import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantPool
+import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantType
 
 /**
  * ClassFile from .class file.

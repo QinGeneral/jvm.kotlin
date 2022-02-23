@@ -1,8 +1,5 @@
 package com.elements.jvmbykotlin.classfile
 
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-
 class ClassReader(data: ByteArray) {
     var index = 0
     private val data: ByteArray
