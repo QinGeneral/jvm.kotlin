@@ -1,9 +1,8 @@
 package com.elements.jvmbykotlin.instructions.base
 
-class BytecodeReader(
-    var code: ByteArray,
-    var pc: Int
-) {
+class BytecodeReader() {
+    lateinit var code: ByteArray
+    var pc: Int = 0
 
     fun readUInt8(): Byte {
         val b = code[pc]
@@ -33,8 +32,22 @@ class BytecodeReader(
         return (byte1 shl 24) or (byte2 shl 16) or (byte3 shl 8) or byte4
     }
 
+    fun readInt32Array(size: Int): ArrayList<Int> {
+        val array = ArrayList<Int>()
+        for (i in 0 until size) {
+            array.add(readInt32())
+        }
+        return array
+    }
+
     fun reset(code: ByteArray, pc: Int) {
         this.code = code
         this.pc = pc
+    }
+
+    fun skipPadding() {
+        while (pc % 4 != 0) {
+            readUInt8()
+        }
     }
 }

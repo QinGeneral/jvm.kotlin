@@ -3,8 +3,8 @@ package com.elements.jvmbykotlin.runtimedata
 import java.util.*
 
 class YuThread(
-    val pc: Int,
 ) {
+    var pc: Int = 0
     private val CAPACITY = 1024
     val stack: Stack<Frame> = Stack()
 
@@ -12,7 +12,7 @@ class YuThread(
 
     }
 
-    fun push(frame: Frame) {
+    fun pushFrame(frame: Frame) {
         if (stack.size >= CAPACITY) {
             throw StackOverflowError("stack overflow")
         }
@@ -22,7 +22,7 @@ class YuThread(
         stack.push(frame)
     }
 
-    fun pop(): Frame {
+    fun popFrame(): Frame {
         if (stack.isEmpty()) {
             throw UnsupportedOperationException("stack is empty")
         }

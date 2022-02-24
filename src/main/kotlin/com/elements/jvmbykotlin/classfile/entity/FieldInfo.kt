@@ -1,6 +1,7 @@
 package com.elements.jvmbykotlin.classfile.entity
 
 import com.elements.jvmbykotlin.classfile.ClassReader
+import com.elements.jvmbykotlin.classfile.entity.attribute.CodeAttribute
 import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantPool
 
 open class FieldInfo(
@@ -21,6 +22,15 @@ open class FieldInfo(
         for (j in 0 until attributesCount.toInt()) {
             attributes.add(AttributeInfo.of(classReader, cp))
         }
+    }
+
+    fun getCodeAttribute(): CodeAttribute? {
+        for (attribute in attributes) {
+            if (attribute is CodeAttribute) {
+                return attribute
+            }
+        }
+        return null
     }
 
     override fun toString(): String {
