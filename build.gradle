@@ -3,7 +3,7 @@ plugins {
     id 'application'
 }
 
-mainClassName = 'com.elements.jvmbygo.Main'
+mainClassName = 'com.elements.jvmbykotlin.Main'
 
 group 'org.elements.jvmbykotlin'
 version '1.0-SNAPSHOT'
