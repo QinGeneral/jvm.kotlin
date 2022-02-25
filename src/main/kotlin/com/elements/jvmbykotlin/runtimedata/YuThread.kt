@@ -27,7 +27,9 @@ class YuThread(
             throw UnsupportedOperationException("stack is empty")
         }
         val frame = stack.pop()
-        stack.peek().lowerFrame = null
+        if (stack.isNotEmpty()) {
+            stack.peek().lowerFrame = null
+        }
         return frame
     }
 

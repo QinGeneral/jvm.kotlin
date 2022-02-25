@@ -4,43 +4,39 @@ import com.elements.jvmbykotlin.instructions.base.Index8Instruction
 import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
-class ILoad : Index8Instruction() {
+class ALoad : Index8Instruction() {
     companion object {
-        fun iLoad(frame: Frame, index: Int) {
-            val value = frame.localVariable.getInt(index)
-            frame.operandStack.pushInt(value)
+        fun aLoad(frame: Frame, index: Int) {
+            val value = frame.localVariable.getRef(index)
+            frame.operandStack.pushRef(value)
         }
     }
 
     override fun execute(frame: Frame) {
-        iLoad(frame, index)
+        aLoad(frame, index)
     }
 }
 
-class ILoad0 : NoOperationsInstruction() {
-
+class ALoad0 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        ILoad.iLoad(frame, 0)
+        DLoad.dLoad(frame, 0)
     }
 }
 
-class ILoad1 : NoOperationsInstruction() {
-
+class ALoad1 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        ILoad.iLoad(frame, 1)
+        DLoad.dLoad(frame, 1)
     }
 }
 
-class ILoad2 : NoOperationsInstruction() {
-
+class ALoad2 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        ILoad.iLoad(frame, 2)
+        DLoad.dLoad(frame, 2)
     }
 }
 
-class ILoad3 : NoOperationsInstruction() {
-
+class ALoad3 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        ILoad.iLoad(frame, 3)
+        DLoad.dLoad(frame, 3)
     }
 }

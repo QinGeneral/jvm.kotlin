@@ -11,4 +11,8 @@ class Slot() {
     constructor(ref: YuObject?) : this() {
         referenceType = ref
     }
+
+    override fun toString(): String {
+        return "Slot(baseType=$baseType, referenceType=$referenceType)"
+    }
 }

@@ -4,43 +4,39 @@ import com.elements.jvmbykotlin.instructions.base.Index8Instruction
 import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
-class IStore : Index8Instruction() {
+class AStore : Index8Instruction() {
     companion object {
-        fun iStore(frame: Frame, index: Int) {
-            val value = frame.operandStack.popInt()
-            frame.localVariable.setInt(index, value)
+        fun aStore(frame: Frame, index: Int) {
+            val value = frame.operandStack.popRef()!!
+            frame.localVariable.setRef(index, value)
         }
     }
 
     override fun execute(frame: Frame) {
-        iStore(frame, index)
+        aStore(frame, index)
     }
 }
 
-class IStore0 : NoOperationsInstruction() {
-
+class AStore0 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        IStore.iStore(frame, 0)
+        AStore.aStore(frame, 0)
     }
 }
 
-class IStore1 : NoOperationsInstruction() {
-
+class AStore1 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        IStore.iStore(frame, 1)
+        AStore.aStore(frame, 1)
     }
 }
 
-class IStore2 : NoOperationsInstruction() {
-
+class AStore2 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        IStore.iStore(frame, 2)
+        AStore.aStore(frame, 2)
     }
 }
 
-class IStore3 : NoOperationsInstruction() {
-
+class AStore3 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        IStore.iStore(frame, 3)
+        AStore.aStore(frame, 3)
     }
 }

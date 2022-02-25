@@ -31,6 +31,8 @@ class Main {
 
             val classFile = ClassFile()
             classFile.parse(result.byteCode!!)
+            val interpreter = Interpreter()
+            interpreter.interpret(classFile.methods[2])
 
             println("class file $classFile")
         }

@@ -51,4 +51,8 @@ class LocalVariable(val maxLocals: Int) {
     fun getRef(index: Int): YuObject? {
         return slots[index].referenceType
     }
+
+    override fun toString(): String {
+        return "LocalVariable maxLocals=$maxLocals, slots=\n${slots.joinToString("\n")})"
+    }
 }

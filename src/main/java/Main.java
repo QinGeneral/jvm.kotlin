@@ -7,7 +7,7 @@ class Main implements IMain {
     }
 
     public static float area(float r) {
-        float pi = 3.14f;
+        float pi = 1f;
         float area = 2 * pi * r;
         return area;
     }

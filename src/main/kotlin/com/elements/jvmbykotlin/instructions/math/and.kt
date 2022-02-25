@@ -12,3 +12,13 @@ class IAnd : NoOperationsInstruction() {
         stack.pushInt(result)
     }
 }
+
+class LAnd : NoOperationsInstruction() {
+    override fun execute(frame: Frame) {
+        val stack = frame.operandStack
+        val v2 = stack.popLong()
+        val v1 = stack.popLong()
+        val result = v1 and v2
+        stack.pushLong(result)
+    }
+}
