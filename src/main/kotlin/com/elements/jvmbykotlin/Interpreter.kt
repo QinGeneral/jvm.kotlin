@@ -31,7 +31,7 @@ class Interpreter {
         while (true) {
             val pc = frame.nextPC
             thread.pc = pc
-
+            println("Execute PC before: $pc")
             reader.reset(bytecode, pc)
             val opcode = reader.readInt8()
             val instruction = InstructionFactory.create(opcode)

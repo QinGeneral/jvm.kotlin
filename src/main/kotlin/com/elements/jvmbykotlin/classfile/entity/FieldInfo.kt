@@ -3,6 +3,7 @@ package com.elements.jvmbykotlin.classfile.entity
 import com.elements.jvmbykotlin.classfile.ClassReader
 import com.elements.jvmbykotlin.classfile.entity.attribute.CodeAttribute
 import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantPool
+import com.elements.jvmbykotlin.classfile.entity.constantpool.Utf8Info
 
 open class FieldInfo(
     classReader: ClassReader,
@@ -14,6 +15,9 @@ open class FieldInfo(
     val attributesCount: UShort
     val attributes: ArrayList<AttributeInfo> = ArrayList()
 
+    val name: String
+    val descriptor: String
+
     init {
         accessFlags = classReader.readU2()
         nameIndex = classReader.readU2()
@@ -22,6 +26,9 @@ open class FieldInfo(
         for (j in 0 until attributesCount.toInt()) {
             attributes.add(AttributeInfo.of(classReader, cp))
         }
+
+        name = (cp.getItem(nameIndex.toInt()) as Utf8Info).value
+        descriptor = (cp.getItem(descriptorIndex.toInt()) as Utf8Info).value
     }
 
     fun getCodeAttribute(): CodeAttribute? {

@@ -4,24 +4,25 @@ class BytecodeReader() {
     lateinit var code: ByteArray
     var pc: Int = 0
 
-    fun readUInt8(): Byte {
+    fun readUInt8(): UByte {
         val b = code[pc]
         pc++
-        return b
+        return b.toUByte()
     }
 
     fun readInt8(): Int {
         return readUInt8().toInt()
     }
 
-    fun readUInt16(): UInt {
-        val high = readUInt8().toUInt()
-        val low = readUInt8()
-        return (high shl 8) or low.toUInt()
+    fun readUInt16(): Int {
+        val high = code[pc].toInt()
+        val low = code[pc + 1].toInt()
+        pc += 2
+        return (high shl 8) or low
     }
 
     fun readInt16(): Int {
-        return readUInt16().toInt()
+        return readUInt16()
     }
 
     fun readInt32(): Int {

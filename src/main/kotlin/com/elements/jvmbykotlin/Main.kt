@@ -1,6 +1,7 @@
 package com.elements.jvmbykotlin
 
 import com.elements.jvmbykotlin.classfile.ClassFile
+import com.elements.jvmbykotlin.classfile.entity.MethodInfo
 import com.elements.jvmbykotlin.classpath.Classpath
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.mainBody
@@ -32,9 +33,24 @@ class Main {
             val classFile = ClassFile()
             classFile.parse(result.byteCode!!)
             val interpreter = Interpreter()
-            interpreter.interpret(classFile.methods[2])
+
+            val mainMethodInfo = getMainMethod(classFile)
+            if (mainMethodInfo == null) {
+                println("main method not found")
+                return
+            }
+            interpreter.interpret(mainMethodInfo)
 
             println("class file $classFile")
+        }
+
+        fun getMainMethod(classFile: ClassFile): MethodInfo? {
+            for (methodInfo in classFile.methods) {
+                if ((methodInfo.name == "main") and (methodInfo.descriptor == "([Ljava/lang/String;)V")) {
+                    return methodInfo
+                }
+            }
+            return null
         }
     }
 }

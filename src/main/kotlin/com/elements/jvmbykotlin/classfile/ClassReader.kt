@@ -39,7 +39,7 @@ class ClassReader(data: ByteArray) {
             byteArray[i] = data[index]
             index++
         }
-        println("byte $size ${byteArray.toList()}")
+        println("readByteArray $size ${byteArray.toList()}")
         return byteArray
     }
 }
