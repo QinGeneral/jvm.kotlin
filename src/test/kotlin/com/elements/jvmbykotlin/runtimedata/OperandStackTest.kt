@@ -1,6 +1,8 @@
 package com.elements.jvmbykotlin.runtimedata
 
-import org.junit.jupiter.api.Assertions.*
+import com.elements.jvmbykotlin.TestUtils
+import com.elements.jvmbykotlin.runtimedata.heap.YuObject
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class OperandStackTest {
@@ -43,7 +45,7 @@ internal class OperandStackTest {
     @Test
     fun testRefPushPop() {
         val operandStack = OperandStack(1)
-        val value = YuObject()
+        val value = YuObject(TestUtils.mockClass(), LocalVariable())
         operandStack.pushRef(value)
 
         assertEquals(value, operandStack.popRef())

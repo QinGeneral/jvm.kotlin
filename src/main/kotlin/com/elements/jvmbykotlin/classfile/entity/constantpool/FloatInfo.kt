@@ -4,7 +4,7 @@ import com.elements.jvmbykotlin.classfile.Utils
 
 open class FloatInfo(tag: UShort, bytes: ByteArray) : BaseConstantPoolItem(tag) {
     val bytes: ByteArray
-    private val value: Float
+    val fValue: Float
         get() {
             return Utils.byteToFloat(bytes)
         }
@@ -14,6 +14,6 @@ open class FloatInfo(tag: UShort, bytes: ByteArray) : BaseConstantPoolItem(tag) 
     }
 
     override fun toString(): String {
-        return "FloatInfo(bytes=${bytes.contentToString()}, value=$value)"
+        return "FloatInfo(bytes=${bytes.contentToString()}, value=$fValue)"
     }
 }

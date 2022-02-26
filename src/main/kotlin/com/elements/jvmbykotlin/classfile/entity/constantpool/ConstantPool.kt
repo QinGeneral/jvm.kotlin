@@ -5,11 +5,19 @@ import com.elements.jvmbykotlin.classfile.ClassReader
 class ConstantPool {
     var items: MutableMap<Int, BaseConstantPoolItem> = HashMap()
 
+    fun getClassName(index: Int): String {
+        return (getItem(index) as ClassInfo).getValue(this)
+    }
+
     fun getItem(index: Int): BaseConstantPoolItem {
         if (items.containsKey(index)) {
             return items[index]!!
         }
         throw IllegalArgumentException("item in cp not found $index")
+    }
+
+    override fun toString(): String {
+        return "ConstantPool items=\n" + items.entries.joinToString("\n")
     }
 
     companion object {

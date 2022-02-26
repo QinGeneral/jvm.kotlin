@@ -7,7 +7,7 @@ open class LongInfo(
 ) : BaseConstantPoolItem(tag) {
     val highBytes: ByteArray
     val lowBytes: ByteArray
-    private val value: Long
+    val lValue: Long
         get() {
             return Utils.byteToLong(highBytes, lowBytes)
         }
@@ -18,6 +18,6 @@ open class LongInfo(
     }
 
     override fun toString(): String {
-        return "LongInfo(highBytes=${highBytes.contentToString()}, lowBytes=${lowBytes.contentToString()}, value=$value)"
+        return "LongInfo(highBytes=${highBytes.contentToString()}, lowBytes=${lowBytes.contentToString()}, value=$lValue)"
     }
 }

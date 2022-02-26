@@ -1,23 +1,19 @@
 package com.elements.jvmbykotlin
 
-import com.elements.jvmbykotlin.classfile.entity.MethodInfo
 import com.elements.jvmbykotlin.instructions.base.BytecodeReader
 import com.elements.jvmbykotlin.instructions.base.InstructionFactory
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.YuThread
+import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
 class Interpreter {
-    fun interpret(methodInfo: MethodInfo) {
-        val codeAttribute = methodInfo.getCodeAttribute()!!
-        val maxLocals = codeAttribute.maxLocals.toInt()
-        val maxStack = codeAttribute.maxStack.toInt()
-        val bytecode = codeAttribute.code
-
+    fun interpret(method: YuMethod) {
+        println("interpret ${method.name}")
         val thread = YuThread()
-        val frame = Frame(thread, maxLocals, maxStack)
+        val frame = Frame(thread, method)
         thread.pushFrame(frame)
         try {
-            loop(thread, bytecode)
+            loop(thread, method.code)
         } catch (e: Exception) {
             e.printStackTrace()
             println("loop exception " + frame.localVariable + " " + frame.operandStack)

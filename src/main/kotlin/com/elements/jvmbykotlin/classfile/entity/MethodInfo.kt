@@ -1,6 +1,7 @@
 package com.elements.jvmbykotlin.classfile.entity
 
 import com.elements.jvmbykotlin.classfile.ClassReader
+import com.elements.jvmbykotlin.classfile.entity.attribute.CodeAttribute
 import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantPool
 
 /**
@@ -20,10 +21,19 @@ import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantPool
 class MethodInfo(
     classReader: ClassReader,
     cp: ConstantPool
-) : FieldInfo(
+) : MemberInfo(
     classReader,
     cp
 ) {
+    fun getCodeAttribute(): CodeAttribute? {
+        for (attribute in attributes) {
+            if (attribute is CodeAttribute) {
+                return attribute
+            }
+        }
+        return null
+    }
+
     override fun toString(): String {
         return "MethodInfo(accessFlags=$accessFlags, nameIndex=$nameIndex, descriptorIndex=$descriptorIndex, attributesCount=$attributesCount, attributes=$attributes)"
     }

@@ -1,10 +1,14 @@
 package com.elements.jvmbykotlin.runtimedata
 
-class LocalVariable(val maxLocals: Int) {
-    val slots: Array<Slot>
+import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 
-    init {
-        slots = Array(maxLocals) { Slot() }
+class LocalVariable() {
+    var slots: Array<Slot> = Array(0) { Slot() }
+    var maxLocals: Int = 0
+
+    constructor(maxLocals: Int) : this() {
+        this.maxLocals = maxLocals
+        this.slots = Array(maxLocals) { Slot() }
     }
 
     fun setInt(index: Int, value: Int) {

@@ -8,6 +8,10 @@ class ClassReader(data: ByteArray) {
         this.data = data
     }
 
+    fun readU1UByte(): UByte {
+        return readByteArray(1)[0].toUByte()
+    }
+
     fun readU1(): UShort {
         val bytes = readByteArray(1)
         return Utils.byteArrayToUShort(bytes)

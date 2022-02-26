@@ -59,6 +59,24 @@ class ClassFile {
 
     var attributes: ArrayList<AttributeInfo> = ArrayList()
 
+    val className: String
+        get() {
+            return constantPool.getClassName(thisClass.toInt())
+        }
+
+    val superClassName: String
+        get() {
+            if (superClass.toInt() == 0) {
+                return ""
+            }
+            return constantPool.getClassName(superClass.toInt())
+        }
+    val interfaceNames: List<String>
+        get() {
+            return interfaces.map { item -> constantPool.getClassName(item.nameIndex.toInt()) }
+                .toList()
+        }
+
     fun parse(classData: ByteArray) {
         val classReader = ClassReader(classData)
         parserMagic(classReader)

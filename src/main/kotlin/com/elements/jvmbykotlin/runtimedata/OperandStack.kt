@@ -1,5 +1,6 @@
 package com.elements.jvmbykotlin.runtimedata
 
+import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 import java.util.*
 
 class OperandStack(val maxStack: Int) {

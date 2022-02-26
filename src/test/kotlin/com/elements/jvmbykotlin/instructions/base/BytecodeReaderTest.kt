@@ -1,6 +1,5 @@
 package com.elements.jvmbykotlin.instructions.base
 
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class BytecodeReaderTest {

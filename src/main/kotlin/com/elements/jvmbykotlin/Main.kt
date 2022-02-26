@@ -1,8 +1,7 @@
 package com.elements.jvmbykotlin
 
-import com.elements.jvmbykotlin.classfile.ClassFile
-import com.elements.jvmbykotlin.classfile.entity.MethodInfo
 import com.elements.jvmbykotlin.classpath.Classpath
+import com.elements.jvmbykotlin.runtimedata.heap.YuClassLoader
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.mainBody
 
@@ -22,35 +21,15 @@ class Main {
 
         fun startJVM(cmd: Cmd) {
             val classpath = Classpath(cmd.jrePathOption, cmd.classPathOption)
+            val classloader = YuClassLoader(classpath)
             val classname = cmd.className.replace(".", "/")
-
-            val result = classpath.readClass(classname)
-            if (!result.isSuccess) {
-                println("Could not find or load class ${cmd.className}")
-                return
+            val mainClass = classloader.loadClass(classname)
+            val mainMethod = mainClass.getMainMethod()
+            if (mainMethod == null) {
+                println("Main method not found in class ${cmd.className}")
             }
-
-            val classFile = ClassFile()
-            classFile.parse(result.byteCode!!)
             val interpreter = Interpreter()
-
-            val mainMethodInfo = getMainMethod(classFile)
-            if (mainMethodInfo == null) {
-                println("main method not found")
-                return
-            }
-            interpreter.interpret(mainMethodInfo)
-
-            println("class file $classFile")
-        }
-
-        fun getMainMethod(classFile: ClassFile): MethodInfo? {
-            for (methodInfo in classFile.methods) {
-                if ((methodInfo.name == "main") and (methodInfo.descriptor == "([Ljava/lang/String;)V")) {
-                    return methodInfo
-                }
-            }
-            return null
+            interpreter.interpret(mainMethod!!)
         }
     }
 }

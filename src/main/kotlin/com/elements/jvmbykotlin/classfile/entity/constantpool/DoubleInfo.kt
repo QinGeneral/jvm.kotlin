@@ -7,12 +7,12 @@ class DoubleInfo(
 ) : LongInfo(
     tag, highBytes, lowBytes
 ) {
-    val value: Double
+    val dValue: Double
         get() {
             return Utils.byteToDouble(highBytes, lowBytes)
         }
 
     override fun toString(): String {
-        return "DoubleInfo(value=$value) ${super.toString()}"
+        return "DoubleInfo(value=$lValue) ${super.toString()}"
     }
 }

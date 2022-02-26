@@ -12,11 +12,9 @@ import com.elements.jvmbykotlin.instructions.extended.IfNull
 import com.elements.jvmbykotlin.instructions.extended.Wide
 import com.elements.jvmbykotlin.instructions.loads.*
 import com.elements.jvmbykotlin.instructions.math.*
+import com.elements.jvmbykotlin.instructions.references.*
 import com.elements.jvmbykotlin.instructions.stack.*
 import com.elements.jvmbykotlin.instructions.stores.*
-import com.sun.org.apache.bcel.internal.generic.ACONST_NULL
-import com.sun.org.apache.bcel.internal.generic.LLOAD
-import java.lang.UnsupportedOperationException
 
 object InstructionFactory {
     fun create(opcode: Int): Instruction {
@@ -24,45 +22,45 @@ object InstructionFactory {
             0x00 ->
                 return NoOperationsInstruction()
             0x01 ->
-                return AConstNullInstruction()
+                return AConstNull()
             0x02 ->
-                return IConstM1Instruction()
+                return IConstM1()
             0x03 ->
-                return IConst0Instruction()
+                return IConst0()
             0x04 ->
-                return IConst1Instruction()
+                return IConst1()
             0x05 ->
-                return IConst2Instruction()
+                return IConst2()
             0x06 ->
-                return IConst3Instruction()
+                return IConst3()
             0x07 ->
-                return IConst4Instruction()
+                return IConst4()
             0x08 ->
-                return IConst5Instruction()
+                return IConst5()
             0x09 ->
-                return LConst0Instruction()
+                return LConst0()
             0x0a ->
-                return LConst1Instruction()
+                return LConst1()
             0x0b ->
-                return FConst0Instruction()
+                return FConst0()
             0x0c ->
-                return FConst1Instruction()
+                return FConst1()
             0x0d ->
-                return FConst2Instruction()
+                return FConst2()
             0x0e ->
-                return DConst0Instruction()
+                return DConst0()
             0x0f ->
-                return DConst1Instruction()
+                return DConst1()
             0x10 ->
-                return BiPushInstruction()
+                return BiPush()
             0x11 ->
-                return SiPushInstruction()
-            //   0x12 ->
-            // 	return &LDC{}
-            //   0x13 ->
-            // 	return &LDC_W{}
-            //   0x14 ->
-            // 	return &LDC2_W{}
+                return SiPush()
+            0x12 ->
+                return LDC()
+            0x13 ->
+                return LDC_W()
+            0x14 ->
+                return LDC2_W()
             0x15 ->
                 return ILoad()
             0x16 ->
@@ -377,14 +375,14 @@ object InstructionFactory {
             // 	return areturn
             //   0xb1 ->
             // 	return _return
-            //	  0xb2 ->
-            //		return &GET_STATIC{}
-            //   0xb3 ->
-            // 	return &PUT_STATIC{}
-            //   0xb4 ->
-            // 	return &GET_FIELD{}
-            //   0xb5 ->
-            // 	return &PUT_FIELD{}
+            0xb2 ->
+                return GetStatic()
+            0xb3 ->
+                return PutStatic()
+            0xb4 ->
+                return GetField()
+            0xb5 ->
+                return PutField()
             //	  0xb6 ->
             //		return &INVOKE_VIRTUAL{}
             //   0xb7 ->
@@ -395,8 +393,8 @@ object InstructionFactory {
             // 	return &INVOKE_INTERFACE{}
             //   0xba ->
             // 	return &INVOKE_DYNAMIC{}
-            //   0xbb ->
-            // 	return &NEW{}
+            0xbb ->
+                return New()
             //   0xbc ->
             // 	return &NEW_ARRAY{}
             //   0xbd ->
@@ -405,10 +403,10 @@ object InstructionFactory {
             // 	return arraylength
             //   0xbf ->
             // 	return athrow
-            //   0xc0 ->
-            // 	return &CHECK_CAST{}
-            //   0xc1 ->
-            // 	return &INSTANCE_OF{}
+            0xc0 ->
+                return CheckCast()
+            0xc1 ->
+                return InstanceOf()
             //   0xc2 ->
             // 	return monitorenter
             //   0xc3 ->

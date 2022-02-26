@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test
 internal class CmdTest {
     private val path = "/Users/zhanghan/Code/IDEAProjects/JVMByKotlin/build/classes/java/main/"
     private val className = "Main"
-    private val jrePath = "/Users/zhanghan/.sdkman/candidates/java/current"
+
+    //    private val className = "Object"
+    private val jrePath = "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre"
     private val args = arrayOf(
         "-v", "-p", path, "-c", className, "--Xjre", jrePath
     )

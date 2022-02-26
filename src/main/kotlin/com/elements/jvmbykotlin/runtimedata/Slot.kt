@@ -1,8 +1,10 @@
 package com.elements.jvmbykotlin.runtimedata
 
+import com.elements.jvmbykotlin.runtimedata.heap.YuObject
+
 class Slot() {
     var baseType: Int = 0
-    var referenceType: YuObject? = YuObject()
+    var referenceType: YuObject? = null
 
     constructor(i: Int) : this() {
         baseType = i

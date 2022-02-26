@@ -1,6 +1,8 @@
 package com.elements.jvmbykotlin.runtimedata
 
-import org.junit.jupiter.api.Assertions.*
+import com.elements.jvmbykotlin.TestUtils
+import com.elements.jvmbykotlin.runtimedata.heap.YuObject
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class LocalVariableTest {
@@ -50,7 +52,7 @@ internal class LocalVariableTest {
 
     @Test
     fun testRefGetSet() {
-        val refValue = YuObject()
+        val refValue = YuObject(TestUtils.mockClass(), LocalVariable())
         val index = 1
         val localVariable = LocalVariable(3)
 

@@ -4,6 +4,14 @@ class NameAndTypeInfo(tag: UShort, nameIndex: UShort, descriptorIndex: UShort) :
     val nameIndex: UShort
     val descriptorIndex: UShort
 
+    fun getName(constantPool: ConstantPool): String {
+        return (constantPool.getItem(nameIndex.toInt()) as Utf8Info).value
+    }
+
+    fun getDescriptor(constantPool: ConstantPool): String {
+        return (constantPool.getItem(descriptorIndex.toInt()) as Utf8Info).value
+    }
+
     init {
         this.nameIndex = nameIndex
         this.descriptorIndex = descriptorIndex

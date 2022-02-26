@@ -26,10 +26,10 @@ class Main implements IMain {
         }
     }
 
-    int test = Integer.MAX_VALUE / 2;
-    int test1 = Integer.MAX_VALUE / 2;
-    boolean bool = true;
-    byte by = 123;
+    public int test = Integer.MAX_VALUE / 2;
+    protected int test1 = Integer.MAX_VALUE / 2;
+    private boolean bool = true;
+    final byte by = 123;
     char ch = 'a';
     short sh = 1234;
     int in = 123456789;
@@ -37,13 +37,13 @@ class Main implements IMain {
     float pi = 3.14f;
     double e = 2.71828;
 
-    public static final String b = "abcd";
+    static String b = "abcd";
 
     public static void main(String[] args) {
         int sum = 0;
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 2; i++) {
             sum += i;
         }
-        System.out.println(sum);
+//        System.out.println(sum);
     }
 }

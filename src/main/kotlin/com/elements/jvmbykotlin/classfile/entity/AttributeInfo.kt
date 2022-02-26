@@ -48,6 +48,9 @@ open class AttributeInfo(open val nameIndex: UShort, open val length: UInt) {
                 "Exceptions" -> {
                     return ExceptionsAttribute(attrNameIndex, attrLength, classReader)
                 }
+                "Signature" -> {
+                    return SignatureAttribute(attrNameIndex, attrLength, classReader)
+                }
             }
             return AttributeInfo(attrNameIndex, attrLength)
         }
