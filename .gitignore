@@ -44,6 +44,8 @@ bin/
 *.iml
 *.ipr
 
+local.properties
+
 # CMake
 cmake-build-*/
 
