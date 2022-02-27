@@ -13,6 +13,7 @@ jvm.kotlin is a toy JVM programmed in Kotlin. The main purpose of this project i
 - macOS Monterey 12.2.1
 - Java 1.8.0_231
 - Kotlin 1.6.0
+- IntelliJ IDEA 2021.2.3 (Community Edition)
 
 ## Build jvm.kotlin
 

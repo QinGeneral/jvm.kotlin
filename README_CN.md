@@ -13,6 +13,7 @@ jvm.kotlin 使用 Kotlin 编写的轻量版 JVM。主要用于 JVM 原理和 Kot
 - macOS Monterey 12.2.1
 - Java 1.8.0_231
 - Kotlin 1.6.0
+- IntelliJ IDEA 2021.2.3 (Community Edition)
 
 ## 编译 jvm.kotlin
 
