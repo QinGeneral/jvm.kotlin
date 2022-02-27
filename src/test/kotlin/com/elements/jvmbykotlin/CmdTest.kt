@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 internal class CmdTest {
-    private val path = "/Users/zhanghan/Code/IDEAProjects/JVMByKotlin/build/classes/java/main/"
+    private val path = "${System.getProperty("user.dir")}/build/classes/java/main/"
     private val className = "Main"
 
     //    private val className = "Object"
