@@ -19,24 +19,24 @@ class ALoad : Index8Instruction() {
 
 class ALoad0 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        DLoad.dLoad(frame, 0)
+        ALoad.aLoad(frame, 0)
     }
 }
 
 class ALoad1 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        DLoad.dLoad(frame, 1)
+        ALoad.aLoad(frame, 1)
     }
 }
 
 class ALoad2 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        DLoad.dLoad(frame, 2)
+        ALoad.aLoad(frame, 2)
     }
 }
 
 class ALoad3 : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
-        DLoad.dLoad(frame, 3)
+        ALoad.aLoad(frame, 3)
     }
 }

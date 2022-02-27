@@ -3,6 +3,7 @@ package com.elements.jvmbykotlin.runtimedata.heap
 import com.elements.jvmbykotlin.classfile.ClassFile
 import com.elements.jvmbykotlin.classpath.ClassReadResult
 import com.elements.jvmbykotlin.classpath.Classpath
+import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
 class YuClassLoader(
     val classPath: Classpath
@@ -110,6 +111,7 @@ class YuClassLoader(
             }
         }
         yuClass.staticSlotCount = slotId
+        yuClass.staticVariables = LocalVariable(slotId)
     }
 
     fun allocAndInitStaticVars(yuClass: YuClass) {

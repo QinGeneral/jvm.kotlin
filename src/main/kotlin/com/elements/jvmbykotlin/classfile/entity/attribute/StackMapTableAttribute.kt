@@ -2,6 +2,7 @@ package com.elements.jvmbykotlin.classfile.entity.attribute
 
 import com.elements.jvmbykotlin.classfile.ClassReader
 import com.elements.jvmbykotlin.classfile.entity.AttributeInfo
+import java.lang.UnsupportedOperationException
 
 //todo
 class StackMapTableAttribute(
@@ -97,13 +98,37 @@ class StackMapTableAttribute(
 
     class AppendFrame(val frameType: Int, classReader: ClassReader) : StackMapTableItem() {
         val offsetDelta: Int
-        val verificationTypeInfoLocals: Array<Int>
+        val verificationTypeInfoLocals: ArrayList<VerificationTypeInfo> = ArrayList()
 
         init {
             offsetDelta = classReader.readU2().toInt()
-            verificationTypeInfoLocals = Array(frameType - 251) { 0 }
-            for (i in verificationTypeInfoLocals.indices) {
-                verificationTypeInfoLocals[i] = classReader.readU1().toInt()
+            for (i in 0 until (frameType - 251)) {
+                verificationTypeInfoLocals.add(VerificationTypeInfo.of(classReader))
+            }
+        }
+
+        override fun toString(): String {
+            return "AppendFrame(frameType=$frameType, offsetDelta=$offsetDelta, verificationTypeInfoLocals=$verificationTypeInfoLocals)"
+        }
+
+    }
+
+    class FullFrame(val frameType: Int, classReader: ClassReader) : StackMapTableItem() {
+        val offsetDelta: Int
+        val numberOfLocal: Int
+        val verificationTypeInfoLocals: ArrayList<VerificationTypeInfo> = ArrayList()
+        val numberOfStackItems: Int
+        val verificationTypeInfoStacks: ArrayList<VerificationTypeInfo> = ArrayList()
+
+        init {
+            offsetDelta = classReader.readU2().toInt()
+            numberOfLocal = classReader.readU2().toInt()
+            for (i in 0 until numberOfLocal) {
+                verificationTypeInfoLocals.add(VerificationTypeInfo.of(classReader))
+            }
+            numberOfStackItems = classReader.readU2().toInt()
+            for (i in 0 until numberOfStackItems) {
+                verificationTypeInfoStacks.add(VerificationTypeInfo.of(classReader))
             }
         }
 
@@ -112,29 +137,99 @@ class StackMapTableAttribute(
         }
     }
 
-    class FullFrame(val frameType: Int, classReader: ClassReader) : StackMapTableItem() {
-        val offsetDelta: Int
-        val numberOfLocal: Int
-        val verificationTypeInfoLocals: Array<Int>
-        val numberOfStackItems: Int
-        val verificationTypeInfoStacks: Array<Int>
+    open class VerificationTypeInfo(open val tag: Int) {
+        companion object {
+            fun of(classReader: ClassReader): VerificationTypeInfo {
+                val tag = classReader.readU1().toInt()
+                when (tag) {
+                    0 ->
+                        return TopVariableInfo(tag)
+                    1 ->
+                        return IntegerVariableInfo(tag)
+                    2 ->
+                        return FloatVariableInfo(tag)
+                    3 ->
+                        return DoubleVariableInfo(tag)
+                    4 ->
+                        return LongVariableInfo(tag)
+                    5 ->
+                        return NullVariableInfo(tag)
+                    6 ->
+                        return UninitializedThisVariableInfo(tag)
+                    7 ->
+                        return ObjectVariableInfo(tag, classReader)
+                    8 ->
+                        return UninitializedVariableInfo(tag, classReader)
+                    else ->
+                        throw UnsupportedOperationException("can't handle tag $tag")
+                }
+            }
+        }
+    }
+
+    class TopVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "TopVariableInfo(tag=$tag)"
+        }
+    }
+
+    class IntegerVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "IntegerVariableInfo(tag=$tag)"
+        }
+    }
+
+    class DoubleVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "DoubleVariableInfo(tag=$tag)"
+        }
+    }
+
+    class LongVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "LongVariableInfo(tag=$tag)"
+        }
+    }
+
+    class FloatVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "FloatVariableInfo(tag=$tag)"
+        }
+    }
+
+    class NullVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "NullVariableInfo(tag=$tag)"
+        }
+    }
+
+    class UninitializedThisVariableInfo(override val tag: Int) : VerificationTypeInfo(tag) {
+        override fun toString(): String {
+            return "UninitializedThisVariableInfo(tag=$tag)"
+        }
+    }
+
+    class ObjectVariableInfo(override val tag: Int, classReader: ClassReader) : VerificationTypeInfo(tag) {
+        val cpoolIndex: Int
 
         init {
-            offsetDelta = classReader.readU2().toInt()
-            numberOfLocal = classReader.readU2().toInt()
-            verificationTypeInfoLocals = Array(numberOfLocal) { 0 }
-            for (i in 0..verificationTypeInfoLocals.size) {
-                verificationTypeInfoLocals[i] = classReader.readU1().toInt()
-            }
-            numberOfStackItems = classReader.readU2().toInt()
-            verificationTypeInfoStacks = Array(numberOfStackItems) { 0 }
-            for (i in 0..verificationTypeInfoStacks.size) {
-                verificationTypeInfoStacks[i] = classReader.readU1().toInt()
-            }
+            cpoolIndex = classReader.readU2().toInt()
         }
 
         override fun toString(): String {
-            return "ChopFrame(frameType=$frameType, offsetDelta=$offsetDelta)"
+            return "ObjectVariableInfo(tag=$tag, cpoolIndex=$cpoolIndex)"
+        }
+    }
+
+    class UninitializedVariableInfo(override val tag: Int, classReader: ClassReader) : VerificationTypeInfo(tag) {
+        val offset: Int
+
+        init {
+            offset = classReader.readU2().toInt()
+        }
+
+        override fun toString(): String {
+            return "UninitializedVariableInfo(tag=$tag, offset=$offset)"
         }
     }
 

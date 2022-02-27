@@ -27,7 +27,7 @@ class Main implements IMain {
     }
 
     public int test = Integer.MAX_VALUE / 2;
-    protected int test1 = Integer.MAX_VALUE / 2;
+    protected static int test1 = Integer.MAX_VALUE / 2;
     private boolean bool = true;
     final byte by = 123;
     char ch = 'a';
@@ -40,10 +40,21 @@ class Main implements IMain {
     static String b = "abcd";
 
     public static void main(String[] args) {
-        int sum = 0;
-        for (int i = 1; i <= 2; i++) {
-            sum += i;
+        int x = 32768;
+        Main main = new Main();
+        main.test = 100;
+        x = main.test;
+        Main.test1 = 11111;
+        x = Main.test1;
+
+        Object obj = main;
+        if (obj instanceof Main) {
+            main = (Main) obj;
         }
+//        int sum = 0;
+//        for (int i = 1; i <= 2; i++) {
+//            sum += i;
+//        }
 //        System.out.println(sum);
     }
 }

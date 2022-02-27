@@ -19,7 +19,7 @@ open class YuClass(classFile: ClassFile) {
     var instanceSlotCount: Int = 0
     var staticSlotCount: Int = 0
 
-    val staticVariables: LocalVariable = LocalVariable()
+    var staticVariables: LocalVariable = LocalVariable()
 
     init {
         accessFlags = classFile.accessFlags.toInt()
@@ -31,14 +31,9 @@ open class YuClass(classFile: ClassFile) {
         methods = YuMethod.getMethods(this, classFile.methods)
     }
 
-    override fun toString(): String {
-        return "Class(accessFlags=$accessFlags, name='$name', superClassName='$superClassName', interfaceNames=${interfaceNames.contentToString()})"
-    }
-
     fun createObject(yuClass: YuClass): YuObject {
         return YuObject(yuClass, LocalVariable(yuClass.instanceSlotCount))
     }
-
 
     fun getMainMethod(): YuMethod? {
         return getStaticMethod("main", "([Ljava/lang/String;)V")
@@ -109,7 +104,6 @@ open class YuClass(classFile: ClassFile) {
         return isPublic() or (getPackageName() == otherClass.getPackageName())
     }
 
-
     fun isPublic(): Boolean {
         return (accessFlags and AccessFlagType.ACC_PUBLIC.value) != 0
     }
@@ -140,5 +134,9 @@ open class YuClass(classFile: ClassFile) {
 
     fun isEnum(): Boolean {
         return (accessFlags and AccessFlagType.ACC_ENUM.value) != 0
+    }
+
+    override fun toString(): String {
+        return "YuClass(accessFlags=$accessFlags, name='$name', superClassName='$superClassName', interfaceNames=${interfaceNames.contentToString()}, constantPool=$constantPool, fields=${fields.contentToString()}, methods=${methods.contentToString()}, loader=$loader, superClass=$superClass, interfaces=$interfaces, instanceSlotCount=$instanceSlotCount, staticSlotCount=$staticSlotCount, staticVariables=$staticVariables)"
     }
 }

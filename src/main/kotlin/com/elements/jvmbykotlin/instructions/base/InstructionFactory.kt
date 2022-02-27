@@ -385,8 +385,8 @@ object InstructionFactory {
                 return PutField()
             //	  0xb6 ->
             //		return &INVOKE_VIRTUAL{}
-            //   0xb7 ->
-            // 	return &INVOKE_SPECIAL{}
+            0xb7 ->
+                return InvokeSpecial()
             //   0xb8 ->
             // 	return &INVOKE_STATIC{}
             //   0xb9 ->
