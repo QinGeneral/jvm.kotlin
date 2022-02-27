@@ -9,6 +9,7 @@ open class MethodRefInfo(tag: UShort, classIndex: UShort, nameAndTypeIndex: USho
     }
 
     fun getNameAndType(constantPool: ConstantPool): NameAndTypeInfo {
+        println("getNameAndType $classIndex ${getClassName(constantPool)} $nameAndTypeIndex")
         return constantPool.getItem(nameAndTypeIndex.toInt()) as NameAndTypeInfo
     }
 

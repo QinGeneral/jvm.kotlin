@@ -37,7 +37,7 @@ class ClassRef(
 open class MemberRef(
     yuConstantPool: YuConstantPool,
     className: String,
-    yuClass: YuClass,
+    yuClass: YuClass?,
     val name: String,
     val descriptor: String
 ) : SymRef(yuConstantPool, className, yuClass) {
@@ -49,7 +49,7 @@ open class MemberRef(
 class FieldRef(
     yuConstantPool: YuConstantPool,
     className: String,
-    yuClass: YuClass,
+    yuClass: YuClass?,
     name: String,
     descriptor: String,
 ) : MemberRef(yuConstantPool, className, yuClass, name, descriptor) {
@@ -98,7 +98,7 @@ class FieldRef(
 class MethodRef(
     yuConstantPool: YuConstantPool,
     className: String,
-    yuClass: YuClass,
+    yuClass: YuClass?,
     name: String,
     descriptor: String,
 ) : MemberRef(yuConstantPool, className, yuClass, name, descriptor) {
@@ -116,7 +116,7 @@ class MethodRef(
 class InterfaceMethodRef(
     yuConstantPool: YuConstantPool,
     className: String,
-    yuClass: YuClass,
+    yuClass: YuClass?,
     name: String,
     descriptor: String,
 ) : MemberRef(yuConstantPool, className, yuClass, name, descriptor) {

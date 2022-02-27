@@ -50,11 +50,8 @@ class Main implements IMain {
         Object obj = main;
         if (obj instanceof Main) {
             main = (Main) obj;
+            System.out.println(main.test);
+            System.out.println(Main.test1);
         }
-//        int sum = 0;
-//        for (int i = 1; i <= 2; i++) {
-//            sum += i;
-//        }
-//        System.out.println(sum);
     }
 }

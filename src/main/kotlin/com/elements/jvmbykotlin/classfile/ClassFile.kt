@@ -122,7 +122,7 @@ class ClassFile {
     }
 
     private fun parserMagic(classReader: ClassReader) {
-        magic = classReader.readU4().toString(16)
+        magic = classReader.readU4String()
         println("magic $magic")
         if (magic != "cafebabe") {
             throw ClassFormatError("magic not match")

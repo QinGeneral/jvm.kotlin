@@ -80,6 +80,7 @@ class YuClassLoader(
     fun prepare(yuClass: YuClass) {
         calcInstanceFieldSlotIds(yuClass)
         calcStaticFieldSlotIds(yuClass)
+        allocAndInitStaticVars(yuClass)
     }
 
     fun calcInstanceFieldSlotIds(yuClass: YuClass) {

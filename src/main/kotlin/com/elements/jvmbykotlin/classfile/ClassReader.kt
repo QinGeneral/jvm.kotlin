@@ -1,5 +1,6 @@
 package com.elements.jvmbykotlin.classfile
 
+
 class ClassReader(data: ByteArray) {
     var index = 0
     private val data: ByteArray
@@ -25,6 +26,11 @@ class ClassReader(data: ByteArray) {
     fun readU4(): UInt {
         val bytes = readByteArray(4)
         return Utils.byteArrayToUInt(bytes)
+    }
+
+    fun readU4String(): String {
+        val bytes = readByteArray(4)
+        return Utils.byteArrayToString(bytes)
     }
 
     fun readU8(): UInt {

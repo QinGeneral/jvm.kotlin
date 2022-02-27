@@ -1,7 +1,6 @@
 package com.elements.jvmbykotlin.classfile
 
 import java.nio.ByteBuffer
-import java.nio.ByteOrder
 
 object Utils {
     fun byteToLong(highByteArray: ByteArray, lowByteArray: ByteArray): Long {
@@ -26,21 +25,35 @@ object Utils {
     }
 
     fun byteArrayToUShort(bytes: ByteArray): UShort {
-        val buffer = ByteBuffer.allocate(bytes.size)
-        buffer.order(ByteOrder.LITTLE_ENDIAN)
-        for (i in bytes.indices.reversed()) {
-            buffer.put(bytes[i])
+        var shift = 0
+        var result = 0u
+        for (byte in bytes.reversed()) {
+            result += byte.toUByte().toUInt() shl shift
+            shift += 8
         }
-        return buffer.get(0).toUShort()
+        return result.toUShort()
     }
 
     fun byteArrayToUInt(bytes: ByteArray): UInt {
-        val buffer = ByteBuffer.allocate(bytes.size)
-        buffer.order(ByteOrder.LITTLE_ENDIAN)
-        for (i in bytes.indices.reversed()) {
-            buffer.put(bytes[i])
+        var shift = 0
+        var result = 0u
+        for (byte in bytes.reversed()) {
+            result += byte.toUByte().toUInt() shl shift
+            shift += 8
         }
-        return buffer.getInt(0).toUInt()
+        return result
+    }
+
+    fun byteArrayToString(bytes: ByteArray): String {
+        return toHexString(bytes)
+    }
+
+    fun toHexString(byteArray: ByteArray): String {
+        val stringBuilder = StringBuilder()
+        for (byte in byteArray) {
+            stringBuilder.append(Integer.toHexString((byte.toInt() and 0xFF)))
+        }
+        return stringBuilder.toString()
     }
 
     fun byteArrayToInt(bytes: ByteArray): Int {

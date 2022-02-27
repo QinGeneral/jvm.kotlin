@@ -383,8 +383,8 @@ object InstructionFactory {
                 return GetField()
             0xb5 ->
                 return PutField()
-            //	  0xb6 ->
-            //		return &INVOKE_VIRTUAL{}
+            0xb6 ->
+                return InvokeVirtual()
             0xb7 ->
                 return InvokeSpecial()
             //   0xb8 ->

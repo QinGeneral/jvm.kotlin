@@ -2,7 +2,6 @@ package com.elements.jvmbykotlin.classfile.entity.attribute
 
 import com.elements.jvmbykotlin.classfile.ClassReader
 import com.elements.jvmbykotlin.classfile.entity.AttributeInfo
-import java.lang.UnsupportedOperationException
 
 //todo
 class StackMapTableAttribute(
@@ -47,28 +46,28 @@ class StackMapTableAttribute(
     }
 
     class SameLocals1StackItemFrame(val frameType: Int, classReader: ClassReader) : StackMapTableItem() {
-        val verificationTypeInfoStacks = Array<Int>(1) { 0 }
+        val verificationTypeInfoStacks = ArrayList<VerificationTypeInfo>(1)
 
         init {
-            verificationTypeInfoStacks[0] = classReader.readU1().toInt()
+            verificationTypeInfoStacks.add(VerificationTypeInfo.of(classReader))
         }
 
         override fun toString(): String {
-            return "SameLocals1StackItemFrame(frameType=$frameType, verificationTypeInfo=${verificationTypeInfoStacks.contentToString()})"
+            return "SameLocals1StackItemFrame(frameType=$frameType, verificationTypeInfoStacks=$verificationTypeInfoStacks)"
         }
     }
 
     class SameLocals1StackItemFrameExtended(val frameType: Int, classReader: ClassReader) : StackMapTableItem() {
         val offsetDelta: Int
-        val verificationTypeInfoStacks = Array<Int>(1) { 0 }
+        val verificationTypeInfoStacks = ArrayList<VerificationTypeInfo>(1)
 
         init {
             offsetDelta = classReader.readU2().toInt()
-            verificationTypeInfoStacks[0] = classReader.readU1().toInt()
+            verificationTypeInfoStacks.add(VerificationTypeInfo.of(classReader))
         }
 
         override fun toString(): String {
-            return "SameLocals1StackItemFrameExtended(frameType=$frameType, offsetDelta=$offsetDelta, verificationTypeInfo=${verificationTypeInfoStacks.contentToString()})"
+            return "SameLocals1StackItemFrameExtended(frameType=$frameType, offsetDelta=$offsetDelta, verificationTypeInfoStacks=$verificationTypeInfoStacks)"
         }
     }
 

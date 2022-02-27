@@ -30,7 +30,7 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                         FieldRef(
                             this,
                             className,
-                            yuClass,
+                            null,
                             nameAndTypeInfo.getName(constantPool),
                             nameAndTypeInfo.getDescriptor(constantPool),
                         )
@@ -42,7 +42,7 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                         MethodRef(
                             this,
                             className,
-                            yuClass,
+                            null,
                             nameAndTypeInfo.getName(constantPool),
                             nameAndTypeInfo.getDescriptor(constantPool),
                         )
@@ -54,7 +54,7 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                         InterfaceMethodRef(
                             this,
                             className,
-                            yuClass,
+                            null,
                             nameAndTypeInfo.getName(constantPool),
                             nameAndTypeInfo.getDescriptor(constantPool),
                         )
