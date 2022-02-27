@@ -27,3 +27,9 @@ cd jvm.kotlin
 ```shell
 build/install/JVMByKotlin/bin/JVMByKotlin -p "build/classes/java/main/" -c "Main" --Xjre ""
 ```
+
+or
+
+Run the unit test in Class `CmdTest`.
+
+> 中文版请[点击这里](README_CN.md)。
