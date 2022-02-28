@@ -21,7 +21,7 @@ class Main {
 
         fun startJVM(cmd: Cmd) {
             val classpath = Classpath(cmd.jrePathOption, cmd.classPathOption)
-            val classloader = YuClassLoader(classpath)
+            val classloader = YuClassLoader(classpath, cmd.verbose)
             val classname = cmd.className.replace(".", "/")
             val mainClass = classloader.loadClass(classname)
             val mainMethod = mainClass.getMainMethod()
@@ -29,7 +29,7 @@ class Main {
                 println("Main method not found in class ${cmd.className}")
             }
             val interpreter = Interpreter()
-            interpreter.interpret(mainMethod!!)
+            interpreter.interpret(mainMethod!!, cmd.verbose)
         }
     }
 }

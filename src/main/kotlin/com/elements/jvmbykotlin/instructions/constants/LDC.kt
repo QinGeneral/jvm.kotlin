@@ -11,9 +11,14 @@ class LDC : Index8Instruction() {
             val stack = frame.operandStack
             val constantPool = frame.method.yuClass.constantPool
             val c = constantPool.getConstant(index)
+            println("LDC $c")
             when (c) {
+                is Int ->
+                    stack.pushInt(c)
                 is IntegerInfo ->
                     stack.pushInt(c.iValue)
+                is Float ->
+                    stack.pushFloat(c)
                 is FloatInfo ->
                     stack.pushFloat(c.fValue)
 //                is String ->

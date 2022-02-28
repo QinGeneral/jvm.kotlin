@@ -18,6 +18,20 @@ open class ClassMember(val yuClass: YuClass, memberInfo: MemberInfo) {
         return (accessFlags and AccessFlagType.ACC_STATIC.value) != 0
     }
 
+    fun isAccessibleTo(otherClass: YuClass): Boolean {
+        if (isPublic()) {
+            return true
+        }
+        val c = yuClass
+        if (isProtected()) {
+            return (otherClass == c) or (otherClass.isSubClassOf(c)) or (c.getPackageName() == otherClass.getPackageName())
+        }
+        if (!isPrivate()) {
+            return c.getPackageName() == otherClass.getPackageName()
+        }
+        return otherClass == c
+    }
+
     fun isPublic(): Boolean {
         return (accessFlags and AccessFlagType.ACC_PUBLIC.value) != 0
     }
@@ -40,6 +54,10 @@ open class ClassMember(val yuClass: YuClass, memberInfo: MemberInfo) {
 
     fun isTransient(): Boolean {
         return (accessFlags and AccessFlagType.ACC_TRANSIENT.value) != 0
+    }
+
+    fun isAbstract(): Boolean {
+        return (accessFlags and AccessFlagType.ACC_ABSTRACT.value) != 0
     }
 
     fun isSynthetic(): Boolean {

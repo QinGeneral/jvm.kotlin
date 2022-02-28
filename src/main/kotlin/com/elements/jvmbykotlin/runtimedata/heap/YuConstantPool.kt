@@ -1,6 +1,9 @@
 package com.elements.jvmbykotlin.runtimedata.heap
 
 import com.elements.jvmbykotlin.classfile.entity.constantpool.*
+import com.elements.jvmbykotlin.runtimedata.heap.ref.FieldRef
+import com.elements.jvmbykotlin.runtimedata.heap.ref.InterfaceMethodRef
+import com.elements.jvmbykotlin.runtimedata.heap.ref.MethodRef
 
 class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
     val constants: MutableMap<Int, Any> = HashMap()
@@ -35,11 +38,11 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                             nameAndTypeInfo.getDescriptor(constantPool),
                         )
                 }
-                is MethodRefInfo -> {
+                is InterfaceMethodRefInfo -> {
                     val className = cpInfo.getClassName(constantPool)
                     val nameAndTypeInfo = cpInfo.getNameAndType(constantPool)
                     constants[key] =
-                        MethodRef(
+                        InterfaceMethodRef(
                             this,
                             className,
                             null,
@@ -47,11 +50,11 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                             nameAndTypeInfo.getDescriptor(constantPool),
                         )
                 }
-                is InterfaceMethodRefInfo -> {
+                is MethodRefInfo -> {
                     val className = cpInfo.getClassName(constantPool)
                     val nameAndTypeInfo = cpInfo.getNameAndType(constantPool)
                     constants[key] =
-                        InterfaceMethodRef(
+                        MethodRef(
                             this,
                             className,
                             null,

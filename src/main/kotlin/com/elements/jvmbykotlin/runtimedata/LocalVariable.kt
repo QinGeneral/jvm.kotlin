@@ -56,6 +56,14 @@ class LocalVariable() {
         return slots[index].referenceType
     }
 
+    fun setSlot(index: Int, value: Slot) {
+        slots[index] = value
+    }
+
+    fun getSlot(index: Int): Slot {
+        return slots[index]
+    }
+
     override fun toString(): String {
         return "LocalVariable maxLocals=$maxLocals, slots=\n${slots.joinToString("\n")})"
     }

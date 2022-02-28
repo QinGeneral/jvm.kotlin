@@ -6,7 +6,8 @@ import com.elements.jvmbykotlin.classpath.Classpath
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
 class YuClassLoader(
-    val classPath: Classpath
+    val classPath: Classpath,
+    val isShowLog: Boolean
 ) {
     val classMap = HashMap<String, YuClass>()
 
@@ -21,7 +22,9 @@ class YuClassLoader(
         val classReadResult = readClass(name)
         val yuClass = defClass(classReadResult.byteCode!!)
         link(yuClass)
-        println("loadNonArrayClass $name")
+        if (isShowLog) {
+            println("loadNonArrayClass $name")
+        }
         return yuClass
     }
 

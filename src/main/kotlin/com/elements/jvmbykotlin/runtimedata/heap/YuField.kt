@@ -31,20 +31,6 @@ class YuField(yuClass: YuClass, fieldInfo: FieldInfo) : ClassMember(yuClass, fie
         return (descriptor == "J") or (descriptor == "D")
     }
 
-    fun isAccessibleTo(otherClass: YuClass): Boolean {
-        if (isPublic()) {
-            return true
-        }
-        val c = yuClass
-        if (isProtected()) {
-            return (otherClass == c) or (otherClass.isSubClassOf(c)) or (c.getPackageName() == otherClass.getPackageName())
-        }
-        if (!isPrivate()) {
-            return c.getPackageName() == otherClass.getPackageName()
-        }
-        return otherClass == c
-    }
-
     override fun toString(): String {
         return "YuField(slotId=$slotId, constValueIndex=$constValueIndex)"
     }

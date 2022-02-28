@@ -8,11 +8,12 @@ import org.junit.jupiter.api.Test
 internal class CmdTest {
     private val path = "${System.getProperty("user.dir")}/build/classes/java/main/"
     private val className = "Main"
+    private val isShowLog = true
 
     //    private val className = "Object"
     private val jrePath = "/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre"
     private val args = arrayOf(
-        "-v", "-p", path, "-c", className, "--Xjre", jrePath
+        "-v", "-p", path, "-c", className, "--Xjre", jrePath, "-l"
     )
     lateinit var cmd: Cmd
 

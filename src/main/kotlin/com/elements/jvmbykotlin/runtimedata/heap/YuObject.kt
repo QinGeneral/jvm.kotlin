@@ -8,6 +8,6 @@ class YuObject(val yuClass: YuClass, val fields: LocalVariable) {
     }
 
     override fun toString(): String {
-        return "YuObject(yuClass=$yuClass, fields=$fields)"
+        return "YuObject(yuClass=${yuClass.name}, fields=${fields.maxLocals})"
     }
 }

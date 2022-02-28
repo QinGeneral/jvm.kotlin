@@ -1,29 +1,30 @@
-class Main implements IMain {
-    @Override
+class Main implements Runnable {
     public float test(float r) {
+        Main.staticMethod();
+        Main main = new Main();
+
+        main.area(3);
+        super.equals(null);
+        this.run();
+        ((Runnable) main).run();
         float pi = 3.14f;
         float area = 2 * pi * r;
         return area;
     }
 
-    public static float area(float r) {
+    public float area(float r) {
         float pi = 1f;
         float area = 2 * pi * r;
         return area;
     }
 
-    @Deprecated
-    public void testDeprecated() throws Exception {
-        Inner inner = new Inner();
-        inner.doSomething();
+    public static void staticMethod() {
+        System.out.println(b);
     }
 
-    private class Inner {
-        private Inner() {
-        }
-
-        private void doSomething() {
-        }
+    @Override
+    public void run() {
+        System.out.println(1024111);
     }
 
     public int test = Integer.MAX_VALUE / 2;
@@ -38,6 +39,7 @@ class Main implements IMain {
     double e = 2.71828;
 
     static String b = "abcd";
+    static int d = 1024111;
 
     public static void main(String[] args) {
         int x = 32768;
@@ -53,5 +55,7 @@ class Main implements IMain {
             System.out.println(main.test);
             System.out.println(Main.test1);
         }
+
+        new Main().test(3);
     }
 }

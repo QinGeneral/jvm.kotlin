@@ -8,6 +8,10 @@ class Cmd(parser: ArgParser) {
         "-v", "--version",
         help = "tool version"
     )
+    val verbose by parser.flagging(
+        "-l", "--verbose",
+        help = "show log"
+    )
     val classPathOption by parser.storing(
         "-p", "--path",
         help = "path to class"
@@ -26,11 +30,12 @@ class Cmd(parser: ArgParser) {
         help = "path to jre"
     )
 
+
     fun printVersion() {
         println("version 0.0.1")
     }
 
     override fun toString(): String {
-        return "Cmd(versionFlag=$versionFlag, classPathOption='$classPathOption', className='$className', args=$args, jrePathOption='$jrePathOption')"
+        return "Cmd(versionFlag=$versionFlag, verbose=$verbose, classPathOption='$classPathOption', className='$className', args=$args, jrePathOption='$jrePathOption')"
     }
 }

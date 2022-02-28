@@ -1,9 +1,9 @@
 package com.elements.jvmbykotlin.instructions.constants
 
-import com.elements.jvmbykotlin.instructions.base.Index8Instruction
+import com.elements.jvmbykotlin.instructions.base.Index16Instruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
-class LDC2_W : Index8Instruction() {
+class LDC2_W : Index16Instruction() {
     override fun execute(frame: Frame) {
         val stack = frame.operandStack
         val constantPool = frame.method.yuClass.constantPool

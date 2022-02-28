@@ -59,6 +59,10 @@ class OperandStack(val maxStack: Int) {
         return slots.pop().referenceType
     }
 
+    fun getRefFromTop(n: Int): YuObject? {
+        return slots[slots.size - n - 1].referenceType
+    }
+
     override fun toString(): String {
         return "OperandStack maxStack=$maxStack, slots=\n${slots.joinToString("\n")}"
     }

@@ -12,6 +12,10 @@ class YuThread(
 
     }
 
+    fun isStackEmpty(): Boolean {
+        return stack.isEmpty()
+    }
+
     fun pushFrame(frame: Frame) {
         if (stack.size >= CAPACITY) {
             throw StackOverflowError("stack overflow")
@@ -33,7 +37,7 @@ class YuThread(
         return frame
     }
 
-    fun top(): Frame {
+    fun topFrame(): Frame {
         if (stack.isEmpty()) {
             throw UnsupportedOperationException("stack is empty")
         }

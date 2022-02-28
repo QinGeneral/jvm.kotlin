@@ -100,6 +100,10 @@ open class YuClass(classFile: ClassFile) {
         return false
     }
 
+    fun isSuperClassOf(otherClass: YuClass): Boolean {
+        return otherClass.isSubClassOf(this)
+    }
+
     fun isAccessibleTo(otherClass: YuClass): Boolean {
         return isPublic() or (getPackageName() == otherClass.getPackageName())
     }

@@ -2,9 +2,7 @@ package com.elements.jvmbykotlin.instructions.base
 
 import com.elements.jvmbykotlin.instructions.comparisons.*
 import com.elements.jvmbykotlin.instructions.constants.*
-import com.elements.jvmbykotlin.instructions.control.Goto
-import com.elements.jvmbykotlin.instructions.control.LookupSwitch
-import com.elements.jvmbykotlin.instructions.control.TableSwitch
+import com.elements.jvmbykotlin.instructions.control.*
 import com.elements.jvmbykotlin.instructions.conversions.*
 import com.elements.jvmbykotlin.instructions.extended.GotoWidely
 import com.elements.jvmbykotlin.instructions.extended.IfNonNull
@@ -363,18 +361,18 @@ object InstructionFactory {
                 return TableSwitch()
             0xab ->
                 return LookupSwitch()
-            //   0xac ->
-            // 	return ireturn
-            //   0xad ->
-            // 	return lreturn
-            //   0xae ->
-            // 	return freturn
-            //   0xaf ->
-            // 	return dreturn
-            //   0xb0 ->
-            // 	return areturn
-            //   0xb1 ->
-            // 	return _return
+            0xac ->
+                return IReturn()
+            0xad ->
+                return LReturn()
+            0xae ->
+                return FReturn()
+            0xaf ->
+                return DReturn()
+            0xb0 ->
+                return AReturn()
+            0xb1 ->
+                return Return()
             0xb2 ->
                 return GetStatic()
             0xb3 ->
@@ -387,10 +385,10 @@ object InstructionFactory {
                 return InvokeVirtual()
             0xb7 ->
                 return InvokeSpecial()
-            //   0xb8 ->
-            // 	return &INVOKE_STATIC{}
-            //   0xb9 ->
-            // 	return &INVOKE_INTERFACE{}
+            0xb8 ->
+                return InvokeStatic()
+            0xb9 ->
+                return InvokeInterface()
             //   0xba ->
             // 	return &INVOKE_DYNAMIC{}
             0xbb ->
