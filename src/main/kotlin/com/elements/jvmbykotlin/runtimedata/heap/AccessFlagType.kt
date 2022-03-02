@@ -16,9 +16,6 @@ enum class AccessFlagType(val value: Int) {
     // field method
     ACC_STATIC(0x0008),
 
-    // todo
-    ACC_PUBLIC_STATIC(0x0009),
-
     // class field method
     ACC_FINAL(0x0010),
 

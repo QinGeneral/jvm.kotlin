@@ -1,5 +1,6 @@
 package com.elements.jvmbykotlin.instructions.references
 
+import com.elements.jvmbykotlin.instructions.base.ClassIntLogic
 import com.elements.jvmbykotlin.instructions.base.Index16Instruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.ref.FieldRef
@@ -10,6 +11,11 @@ class GetStatic : Index16Instruction() {
         val fieldRef = constantPool.getConstant(index) as FieldRef
         val field = fieldRef.resolveField()
         val c = field.yuClass
+        if (!c.isInitStarted) {
+            frame.revertNextPC()
+            ClassIntLogic.initClass(frame.thread, c)
+            return
+        }
         if (!field.isStatic()) {
             throw IncompatibleClassChangeError("Incompatible class ${c.name} ${field.name}")
         }

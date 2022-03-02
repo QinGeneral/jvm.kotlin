@@ -28,7 +28,7 @@ class Interpreter {
             val frame = thread.topFrame()
             val pc = frame.nextPC
             thread.pc = pc
-            println("Execute PC before: $pc")
+            println("Execute PC before: $pc ${frame.method.yuClass.name} ${frame.method.name}")
             reader.reset(frame.method.code, pc)
             val opcode = reader.readInt8()
             val instruction = InstructionFactory.create(opcode)

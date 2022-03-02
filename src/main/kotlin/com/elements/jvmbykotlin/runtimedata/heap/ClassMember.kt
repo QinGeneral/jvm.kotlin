@@ -32,6 +32,10 @@ open class ClassMember(val yuClass: YuClass, memberInfo: MemberInfo) {
         return otherClass == c
     }
 
+    fun isNative(): Boolean {
+        return (accessFlags and AccessFlagType.ACC_NATIVE.value) != 0
+    }
+
     fun isPublic(): Boolean {
         return (accessFlags and AccessFlagType.ACC_PUBLIC.value) != 0
     }

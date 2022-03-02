@@ -48,7 +48,7 @@ class LocalVariable() {
         return Double.fromBits(longValue)
     }
 
-    fun setRef(index: Int, value: YuObject) {
+    fun setRef(index: Int, value: YuObject?) {
         slots[index].referenceType = value
     }
 

@@ -38,8 +38,8 @@ class Main implements Runnable {
     float pi = 3.14f;
     double e = 2.71828;
 
-    static String b = "abcd";
-    static int d = 1024111;
+    static int b = 4201;
+    static int d = 1024121;
 
     public static void main(String[] args) {
         int x = 32768;

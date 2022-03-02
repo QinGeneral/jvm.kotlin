@@ -21,6 +21,8 @@ open class YuClass(classFile: ClassFile) {
 
     var staticVariables: LocalVariable = LocalVariable()
 
+    var isInitStarted = false
+
     init {
         accessFlags = classFile.accessFlags.toInt()
         name = classFile.className
@@ -29,6 +31,14 @@ open class YuClass(classFile: ClassFile) {
         constantPool = YuConstantPool(this, classFile.constantPool)
         fields = YuField.getFields(this, classFile.fieldsInfo)
         methods = YuMethod.getMethods(this, classFile.methods)
+    }
+
+    fun startInit() {
+        isInitStarted = true
+    }
+
+    fun getClinitMethod(): YuMethod? {
+        return getStaticMethod("<clinit>", "()V")
     }
 
     fun createObject(yuClass: YuClass): YuObject {
