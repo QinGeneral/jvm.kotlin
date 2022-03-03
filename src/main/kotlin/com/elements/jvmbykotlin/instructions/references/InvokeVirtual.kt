@@ -3,6 +3,7 @@ package com.elements.jvmbykotlin.instructions.references
 import com.elements.jvmbykotlin.instructions.base.Index16Instruction
 import com.elements.jvmbykotlin.instructions.base.InvokeLogic
 import com.elements.jvmbykotlin.runtimedata.Frame
+import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.ref.MethodRef
 
 class InvokeVirtual : Index16Instruction() {
@@ -47,21 +48,26 @@ class InvokeVirtual : Index16Instruction() {
             val stack = frame.operandStack
             when (methodRef.descriptor) {
                 "(Z)V" ->
-                    println("InvokeVirtual ${stack.popInt() != 0}")
+                    println("InvokeVirtual println ${stack.popInt() != 0}")
                 "(C)V" ->
-                    println("InvokeVirtual ${stack.popInt()}")
+                    println("InvokeVirtual println ${stack.popInt()}")
                 "(B)V" ->
-                    println("InvokeVirtual ${stack.popInt()}")
+                    println("InvokeVirtual println ${stack.popInt()}")
                 "(S)V" ->
-                    println("InvokeVirtual ${stack.popInt()}")
+                    println("InvokeVirtual println ${stack.popInt()}")
                 "(I)V" ->
-                    println("InvokeVirtual ${stack.popInt()}")
+                    println("InvokeVirtual println ${stack.popInt()}")
                 "(J)V" ->
-                    println("InvokeVirtual ${stack.popLong()}")
+                    println("InvokeVirtual println ${stack.popLong()}")
                 "(F)V" ->
-                    println("InvokeVirtual ${stack.popFloat()}")
+                    println("InvokeVirtual println ${stack.popFloat()}")
                 "(D)V" ->
-                    println("InvokeVirtual ${stack.popDouble()}")
+                    println("InvokeVirtual println ${stack.popDouble()}")
+                "(Ljava/lang/String;)V" -> {
+                    val jStr = stack.popRef()
+                    val str = InternedString.string(jStr!!)
+                    println("InvokeVirtual println $str")
+                }
                 else ->
                     println("not support method ${methodRef.descriptor}")
             }

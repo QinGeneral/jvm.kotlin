@@ -9,7 +9,22 @@ class Main implements Runnable {
         ((Runnable) main).run();
         float pi = 3.14f;
         float area = 2 * pi * r;
+
+        testArray();
+
         return area;
+    }
+
+    private void testArray() {
+        int[] intArray = new int[10];
+        String[] strArray = new String[10];
+        int[][] intAA = new int[10][10];
+        int[][][] intDim = new int[3][4][5];
+        int x = intArray.length;
+        intArray[0] = 1000;
+        int y = intArray[0];
+        strArray[0] = "hello array";
+        String s = strArray[0];
     }
 
     public float area(float r) {
@@ -37,6 +52,7 @@ class Main implements Runnable {
     long lon = 1000;
     float pi = 3.14f;
     double e = 2.71828;
+    int[] arr = new int[]{111, 123};
 
     static int b = 4201;
     static int d = 1024121;
@@ -57,5 +73,7 @@ class Main implements Runnable {
         }
 
         new Main().test(3);
+
+        System.out.println(args.length > 0 ? args[0] : "hello kvm");
     }
 }

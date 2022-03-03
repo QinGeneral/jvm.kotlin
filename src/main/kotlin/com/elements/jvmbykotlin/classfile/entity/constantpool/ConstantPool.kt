@@ -91,6 +91,20 @@ class ConstantPool {
                     val lowBytes = classReader.readByteArray(4)
                     return DoubleInfo(type, highBytes, lowBytes)
                 }
+                ConstantType.INVOKE_DYNAMIC -> {
+                    val bootstrapMethodAttrIndex = classReader.readU2().toInt()
+                    val nameAndTypeIndex = classReader.readU2().toInt()
+                    return InvokeDynamicInfo(type, bootstrapMethodAttrIndex, nameAndTypeIndex)
+                }
+                ConstantType.METHOD_HANDLE -> {
+                    val referenceKind = classReader.readU1().toInt()
+                    val referenceIndex = classReader.readU2().toInt()
+                    return MethodHandleInfo(type, referenceKind, referenceIndex)
+                }
+                ConstantType.METHOD_TYPE -> {
+                    val descriptorIndex = classReader.readU2().toInt()
+                    return MethodTypeInfo(type, descriptorIndex)
+                }
                 else ->
                     return BaseConstantPoolItem(type)
             }

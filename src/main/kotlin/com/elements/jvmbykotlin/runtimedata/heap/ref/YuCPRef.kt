@@ -29,7 +29,7 @@ open class SymRef(
 class ClassRef(
     yuConstantPool: YuConstantPool,
     className: String,
-    yuClass: YuClass
+    yuClass: YuClass?
 ) : SymRef(yuConstantPool, className, yuClass) {
 
 }

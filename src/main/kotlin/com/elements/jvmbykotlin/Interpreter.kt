@@ -5,14 +5,21 @@ import com.elements.jvmbykotlin.instructions.base.Instruction
 import com.elements.jvmbykotlin.instructions.base.InstructionFactory
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.YuThread
+import com.elements.jvmbykotlin.runtimedata.heap.ArrayObject
+import com.elements.jvmbykotlin.runtimedata.heap.InternedString
+import com.elements.jvmbykotlin.runtimedata.heap.YuClassLoader
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
 class Interpreter {
-    fun interpret(method: YuMethod, isLogInstruction: Boolean) {
+    fun interpret(method: YuMethod, isLogInstruction: Boolean, args: ArrayList<String>) {
         println("interpret ${method.name}")
         val thread = YuThread()
         val frame = Frame(thread, method)
         thread.pushFrame(frame)
+
+        val jArgs = createArgsArray(method.yuClass.loader, args)
+        frame.localVariable.setRef(0, jArgs)
+
         try {
             loop(thread, isLogInstruction)
         } catch (e: Exception) {
@@ -21,7 +28,7 @@ class Interpreter {
         }
     }
 
-    fun loop(thread: YuThread, isLogInstruction: Boolean) {
+    private fun loop(thread: YuThread, isLogInstruction: Boolean) {
         val reader = BytecodeReader()
         println("============================================")
         while (true) {
@@ -50,7 +57,17 @@ class Interpreter {
         }
     }
 
-    fun logFrames(thread: YuThread) {
+    private fun createArgsArray(yuClassLoader: YuClassLoader, args: ArrayList<String>): ArrayObject {
+        val stringClass = yuClassLoader.loadClass("java/lang/String")
+        val argsArray = ArrayObject.of(stringClass.getArrayClass(), args.size)
+        val jArgs = argsArray.refs()
+        for (i in 0 until args.size) {
+            jArgs[i] = InternedString.jString(yuClassLoader, args[i])
+        }
+        return argsArray
+    }
+
+    private fun logFrames(thread: YuThread) {
         while (!thread.isStackEmpty()) {
             val frame = thread.popFrame()
             val method = frame.method
@@ -59,7 +76,7 @@ class Interpreter {
         }
     }
 
-    fun logInstruction(frame: Frame, instruction: Instruction) {
+    private fun logInstruction(frame: Frame, instruction: Instruction) {
         val method = frame.method
         val className = method.yuClass.name
         println(">> PC $className ${method.name} ${frame.thread.pc} $instruction")

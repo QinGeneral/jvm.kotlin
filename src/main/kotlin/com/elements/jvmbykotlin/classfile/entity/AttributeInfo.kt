@@ -51,6 +51,12 @@ open class AttributeInfo(open val nameIndex: UShort, open val length: UInt) {
                 "Signature" -> {
                     return SignatureAttribute(attrNameIndex, attrLength, classReader)
                 }
+                "InnerClasses" -> {
+                    return InnerClassesAttribute(attrNameIndex, attrLength, classReader)
+                }
+                "BootstrapMethods" -> {
+                    return BootstrapMethodsAttribute(attrNameIndex, attrLength, classReader)
+                }
             }
             return AttributeInfo(attrNameIndex, attrLength)
         }

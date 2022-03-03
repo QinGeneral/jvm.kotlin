@@ -109,22 +109,22 @@ object InstructionFactory {
                 return ALoad2()
             0x2d ->
                 return ALoad3()
-            //   0x2e ->
-            // 	return iaload
-            //   0x2f ->
-            // 	return laload
-            //   0x30 ->
-            // 	return faload
-            //   0x31 ->
-            // 	return daload
-            //   0x32 ->
-            // 	return aaload
-            //   0x33 ->
-            // 	return baload
-            //   0x34 ->
-            // 	return caload
-            //   0x35 ->
-            // 	return saload
+            0x2e ->
+                return IALoad()
+            0x2f ->
+                return LALoad()
+            0x30 ->
+                return FALoad()
+            0x31 ->
+                return DALoad()
+            0x32 ->
+                return AALoad()
+            0x33 ->
+                return BALoad()
+            0x34 ->
+                return CALoad()
+            0x35 ->
+                return SALoad()
             0x36 ->
                 return IStore()
             0x37 ->
@@ -175,22 +175,22 @@ object InstructionFactory {
                 return AStore2()
             0x4e ->
                 return AStore3()
-            //   0x4f ->
-            // 	return iastore
-            //   0x50 ->
-            // 	return lastore
-            //   0x51 ->
-            // 	return fastore
-            //   0x52 ->
-            // 	return dastore
-            //   0x53 ->
-            // 	return aastore
-            //   0x54 ->
-            // 	return bastore
-            //   0x55 ->
-            // 	return castore
-            //   0x56 ->
-            // 	return sastore
+            0x4f ->
+                return IAStore()
+            0x50 ->
+                return LAStore()
+            0x51 ->
+                return FAStore()
+            0x52 ->
+                return DAStore()
+            0x53 ->
+                return AAStore()
+            0x54 ->
+                return BAStore()
+            0x55 ->
+                return CAStore()
+            0x56 ->
+                return SAStore()
             0x57 ->
                 return Pop()
             0x58 ->
@@ -389,16 +389,16 @@ object InstructionFactory {
                 return InvokeStatic()
             0xb9 ->
                 return InvokeInterface()
-            //   0xba ->
-            // 	return &INVOKE_DYNAMIC{}
+            0xba ->
+                return InvokeDynamic()
             0xbb ->
                 return New()
-            //   0xbc ->
-            // 	return &NEW_ARRAY{}
-            //   0xbd ->
-            // 	return &ANEW_ARRAY{}
-            //   0xbe ->
-            // 	return arraylength
+            0xbc ->
+                return NewArray()
+            0xbd ->
+                return ANewArray()
+            0xbe ->
+                return ArrayLength()
             //   0xbf ->
             // 	return athrow
             0xc0 ->
@@ -411,8 +411,8 @@ object InstructionFactory {
             // 	return monitorexit
             0xc4 ->
                 return Wide()
-            //   0xc5 ->
-            // 	return &MULTI_ANEW_ARRAY{}
+            0xc5 ->
+                return MultiANewArray()
             0xc6 ->
                 return IfNull()
             0xc7 ->

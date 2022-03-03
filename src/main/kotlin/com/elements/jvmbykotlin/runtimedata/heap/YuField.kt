@@ -14,7 +14,7 @@ class YuField(yuClass: YuClass, fieldInfo: FieldInfo) : ClassMember(yuClass, fie
 
     init {
         if (fieldInfo.getConstantValueAttribute() != null) {
-            constValueIndex = fieldInfo.getConstantValueAttribute()!!.nameIndex.toInt()
+            constValueIndex = fieldInfo.getConstantValueAttribute()!!.constantValueIndex.toInt()
         }
     }
 

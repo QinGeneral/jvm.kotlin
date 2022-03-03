@@ -24,7 +24,7 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                     constants[key] = cpInfo.getValue(constantPool)
                 is ClassInfo -> {
                     val className = cpInfo.getValue(constantPool)
-                    constants[key] = ClassRef(this, className, yuClass)
+                    constants[key] = ClassRef(this, className, null)
                 }
                 is FieldRefInfo -> {
                     val className = cpInfo.getClassName(constantPool)
@@ -61,6 +61,10 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
                             nameAndTypeInfo.getName(constantPool),
                             nameAndTypeInfo.getDescriptor(constantPool),
                         )
+                }
+                is Utf8Info -> {
+
+//                    constants[key] =
                 }
             }
 

@@ -29,7 +29,7 @@ class Main {
                 println("Main method not found in class ${cmd.className}")
             }
             val interpreter = Interpreter()
-            interpreter.interpret(mainMethod!!, cmd.verbose)
+            interpreter.interpret(mainMethod!!, cmd.verbose, cmd.args as ArrayList<String>)
         }
     }
 }

@@ -9,16 +9,33 @@ class YuClassLoader(
     val classPath: Classpath,
     val isShowLog: Boolean
 ) {
-    val classMap = HashMap<String, YuClass>()
+    private val classMap = HashMap<String, YuClass>()
 
     fun loadClass(name: String): YuClass {
         if (name in classMap.keys) {
             return classMap[name]!!
         }
+        if (name[0] == '[') {
+            return loadArrayClass(name)
+        }
         return loadNonArrayClass(name)
     }
 
-    fun loadNonArrayClass(name: String): YuClass {
+    private fun loadArrayClass(name: String): YuClass {
+        val arrayClass = YuClass(
+            // todo
+            AccessFlagType.ACC_PUBLIC.value,
+            name,
+            this,
+            true,
+            loadClass("java/lang/Object"),
+            arrayListOf(loadClass("java/lang/Cloneable"), loadClass("java/io/Serializable"))
+        )
+        classMap[name] = arrayClass
+        return arrayClass
+    }
+
+    private fun loadNonArrayClass(name: String): YuClass {
         val classReadResult = readClass(name)
         val yuClass = defClass(classReadResult.byteCode!!)
         link(yuClass)
@@ -28,7 +45,7 @@ class YuClassLoader(
         return yuClass
     }
 
-    fun readClass(name: String): ClassReadResult {
+    private fun readClass(name: String): ClassReadResult {
         println("readClass name $name")
         val classReadResult = classPath.readClass(name)
         println("readClass name $name result ${classReadResult.isSuccess}")
@@ -38,7 +55,7 @@ class YuClassLoader(
         return classReadResult
     }
 
-    fun defClass(data: ByteArray): YuClass {
+    private fun defClass(data: ByteArray): YuClass {
         println("defClass begin")
         val yuClass = parseClass(data)
         yuClass.loader = this
@@ -49,7 +66,7 @@ class YuClassLoader(
         return yuClass
     }
 
-    fun parseClass(data: ByteArray): YuClass {
+    private fun parseClass(data: ByteArray): YuClass {
         println("parseClass begin")
         val classFile = ClassFile()
         classFile.parse(data)
@@ -57,36 +74,36 @@ class YuClassLoader(
         return YuClass(classFile)
     }
 
-    fun resolveSuperCLass(yuClass: YuClass) {
+    private fun resolveSuperCLass(yuClass: YuClass) {
         if (yuClass.name != "java/lang/Object") {
             yuClass.superClass = loadClass(yuClass.superClassName)
         }
     }
 
-    fun resolveInterfaces(yuClass: YuClass) {
+    private fun resolveInterfaces(yuClass: YuClass) {
         for (interfaceName in yuClass.interfaceNames) {
             val yuInterface = loadClass(interfaceName)
             yuClass.interfaces.add(yuInterface)
         }
     }
 
-    fun link(yuClass: YuClass) {
+    private fun link(yuClass: YuClass) {
         verify(yuClass)
         prepare(yuClass)
     }
 
     // todo verify the class
-    fun verify(yuClass: YuClass) {
+    private fun verify(yuClass: YuClass) {
 
     }
 
-    fun prepare(yuClass: YuClass) {
+    private fun prepare(yuClass: YuClass) {
         calcInstanceFieldSlotIds(yuClass)
         calcStaticFieldSlotIds(yuClass)
         allocAndInitStaticVars(yuClass)
     }
 
-    fun calcInstanceFieldSlotIds(yuClass: YuClass) {
+    private fun calcInstanceFieldSlotIds(yuClass: YuClass) {
         var slotId = 0
         if (yuClass.superClass != null) {
             slotId = yuClass.superClass!!.instanceSlotCount
@@ -103,7 +120,7 @@ class YuClassLoader(
         yuClass.instanceSlotCount = slotId
     }
 
-    fun calcStaticFieldSlotIds(yuClass: YuClass) {
+    private fun calcStaticFieldSlotIds(yuClass: YuClass) {
         var slotId = 0
         for (field in yuClass.fields) {
             if (field.isStatic()) {
@@ -118,7 +135,7 @@ class YuClassLoader(
         yuClass.staticVariables = LocalVariable(slotId)
     }
 
-    fun allocAndInitStaticVars(yuClass: YuClass) {
+    private fun allocAndInitStaticVars(yuClass: YuClass) {
         for (field in yuClass.fields) {
             if (field.isStatic() and field.isFinal()) {
                 initStaticFinalVariables(yuClass, field)
@@ -126,7 +143,7 @@ class YuClassLoader(
         }
     }
 
-    fun initStaticFinalVariables(yuClass: YuClass, field: YuField) {
+    private fun initStaticFinalVariables(yuClass: YuClass, field: YuField) {
         val variables = yuClass.staticVariables
         val constantPool = yuClass.constantPool
         val cpIndex = field.constValueIndex
@@ -152,8 +169,9 @@ class YuClassLoader(
                 variables.setDouble(slotId, value)
             }
             "Ljava/lang/String;" -> {
-                // todo
-                throw UnsupportedOperationException("String not support")
+                val str = constantPool.getConstant(cpIndex) as String
+                val jStr = InternedString.jString(yuClass.loader, str)
+                variables.setRef(slotId, jStr)
             }
         }
     }
