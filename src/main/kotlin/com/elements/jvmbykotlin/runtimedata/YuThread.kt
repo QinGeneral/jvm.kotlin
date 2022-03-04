@@ -4,8 +4,18 @@ import java.util.*
 
 class YuThread(
 ) {
+    /**
+     * program counter (register)
+     * contains the address of the instruction being executed
+     */
     var pc: Int = 0
+
     private val CAPACITY = 1024
+
+    /**
+     * A new frame is created/pushed each time a method is invoked.
+     * A frame is destroyed/popped when its method invocation completes
+     */
     val stack: Stack<Frame> = Stack()
 
     init {

@@ -7,6 +7,11 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.YuString
 
+/**
+ * Instruction load constant
+ *
+ * Load from constant pool to operand.
+ */
 class LDC : Index8Instruction() {
     companion object {
         fun ldc(frame: Frame, index: Int) {

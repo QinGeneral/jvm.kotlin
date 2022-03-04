@@ -3,6 +3,12 @@ package com.elements.jvmbykotlin.runtimedata
 import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 import java.util.*
 
+/**
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.6.2">Operand Stacks</a>
+ *
+ * @param maxStack depth of the operand stack depends on method,
+ * determined at compile time and included in the class file data for each method.
+ */
 class OperandStack(val maxStack: Int) {
     val slots: Stack<Slot> = Stack()
 

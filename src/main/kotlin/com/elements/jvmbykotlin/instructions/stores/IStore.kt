@@ -4,6 +4,11 @@ import com.elements.jvmbykotlin.instructions.base.Index8Instruction
 import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
+/**
+ * Instruction store integer
+ *
+ * Store integer from operand stack to local variables
+ */
 class IStore : Index8Instruction() {
     companion object {
         fun iStore(frame: Frame, index: Int) {
