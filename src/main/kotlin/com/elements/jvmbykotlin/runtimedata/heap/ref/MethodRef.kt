@@ -29,7 +29,7 @@ class MethodRef(
         }
         val method = lookupMethod(c, name, descriptor) ?: throw NoSuchFieldError("No such method")
         if (!method.isAccessibleTo(d)) {
-            throw  IllegalAccessError("Method ${method.name} can't access to class ${d.name}")
+            throw  IllegalAccessError("Method ${c.name} ${method.name} can't access to class ${d.name}")
         }
         this.method = method
     }

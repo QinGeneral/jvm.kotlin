@@ -7,7 +7,7 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 class AStore : Index8Instruction() {
     companion object {
         fun aStore(frame: Frame, index: Int) {
-            val value = frame.operandStack.popRef()!!
+            val value = frame.operandStack.popRef()
             frame.localVariable.setRef(index, value)
         }
     }

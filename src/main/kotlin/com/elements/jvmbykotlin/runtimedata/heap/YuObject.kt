@@ -3,7 +3,8 @@ package com.elements.jvmbykotlin.runtimedata.heap
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
 open class YuObject(open val yuClass: YuClass) {
-    lateinit var fields: LocalVariable
+    var fields: LocalVariable = LocalVariable()
+    var extra: Any? = null
 
     constructor(yuClass: YuClass, fields: LocalVariable) : this(yuClass) {
         this.fields = fields

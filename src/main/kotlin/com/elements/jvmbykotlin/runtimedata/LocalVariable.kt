@@ -64,6 +64,10 @@ class LocalVariable() {
         return slots[index]
     }
 
+    fun getThis(): YuObject {
+        return getRef(0) as YuObject
+    }
+
     override fun toString(): String {
         return "LocalVariable maxLocals=$maxLocals, slots=\n${slots.joinToString("\n")})"
     }

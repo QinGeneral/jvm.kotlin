@@ -18,10 +18,37 @@ open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAt
             maxLocals = attributes.maxLocals.toInt()
             code = attributes.code
         }
-        calcArgSlotCount()
+        val methodDescriptor = calcArgSlotCount()
+        if (isNative()) {
+            injectCodeAttribute(methodDescriptor.returnType)
+        }
     }
 
-    fun calcArgSlotCount() {
+    /**
+     * fill stack, local variable and code attribute in native method
+     *
+     * @param returnType native method's return type
+     */
+    private fun injectCodeAttribute(returnType: String) {
+        maxStack = 4
+        maxLocals = argSlotCount
+        code = when (returnType[0]) {
+            'V' ->
+                byteArrayOf(0xfe.toByte(), 0xb1.toByte())
+            'D' ->
+                byteArrayOf(0xfe.toByte(), 0xaf.toByte())
+            'F' ->
+                byteArrayOf(0xfe.toByte(), 0xae.toByte())
+            'J' ->
+                byteArrayOf(0xfe.toByte(), 0xad.toByte())
+            'L', '[' ->
+                byteArrayOf(0xfe.toByte(), 0xb0.toByte())
+            else ->
+                byteArrayOf(0xfe.toByte(), 0xac.toByte())
+        }
+    }
+
+    private fun calcArgSlotCount(): MethodDescriptor {
         val descriptor = MethodDescriptor(descriptor)
         for (paramType in descriptor.paramTypes) {
             argSlotCount++
@@ -32,6 +59,7 @@ open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAt
         if (!isStatic()) {
             argSlotCount++
         }
+        return descriptor
     }
 
 
@@ -107,11 +135,10 @@ open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAt
     }
 
     companion object {
-        fun getMethods(yuClass: YuClass, methodInfo: ArrayList<MethodInfo>): Array<YuMethod> {
+        fun getMethods(yuClass: YuClass, methodInfo: ArrayList<MethodInfo>): ArrayList<YuMethod> {
             return methodInfo
                 .map { item -> YuMethod(yuClass, item, item.getCodeAttribute()) }
-                .toList()
-                .toTypedArray()
+                .toMutableList() as ArrayList<YuMethod>
         }
     }
 

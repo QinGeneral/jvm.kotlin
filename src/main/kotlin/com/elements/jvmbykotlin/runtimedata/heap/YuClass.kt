@@ -11,7 +11,7 @@ open class YuClass() {
 
     lateinit var constantPool: YuConstantPool
     lateinit var fields: Array<YuField>
-    lateinit var methods: Array<YuMethod>
+    var methods: ArrayList<YuMethod> = ArrayList()
     lateinit var loader: YuClassLoader
     var superClass: YuClass? = null
     val interfaces: ArrayList<YuClass> = ArrayList()
@@ -23,17 +23,12 @@ open class YuClass() {
 
     var isInitStarted = false
 
-    val primitiveTypes = mapOf(
-        "void" to "V",
-        "boolean" to "Z",
-        "byte" to "B",
-        "short" to "S",
-        "int" to "I",
-        "long" to "J",
-        "char" to "C",
-        "float" to "F",
-        "double" to "D",
-    )
+    var jClass : YuObject? = null
+
+    val javaName:String
+        get() {
+            return name.replace("/", ".")
+        }
 
     constructor(classFile: ClassFile) : this() {
         this.accessFlags = classFile.accessFlags.toInt()
@@ -91,7 +86,7 @@ open class YuClass() {
         if (index < 0) {
             return ""
         }
-        return name.substring(index)
+        return name.substring(0, index)
     }
 
     fun getComponentClass(): YuClass {
@@ -114,9 +109,9 @@ open class YuClass() {
         if (descriptor[0] == 'L') {
             return descriptor.substring(1, descriptor.length - 1)
         }
-        for (key in primitiveTypes.keys) {
+        for (key in Constants.PRIMITIVE_TYPES.keys) {
             if (key == descriptor) {
-                return primitiveTypes[key]!!
+                return Constants.PRIMITIVE_TYPES[key]!!
             }
         }
         throw Exception("Invalid descriptor $descriptor")
@@ -135,8 +130,8 @@ open class YuClass() {
         if (className[0] == '[') {
             return className
         }
-        if (className in primitiveTypes.keys) {
-            return primitiveTypes[className]!!
+        if (className in Constants.PRIMITIVE_TYPES.keys) {
+            return Constants.PRIMITIVE_TYPES[className]!!
         }
         return "L" + className + ";"
     }

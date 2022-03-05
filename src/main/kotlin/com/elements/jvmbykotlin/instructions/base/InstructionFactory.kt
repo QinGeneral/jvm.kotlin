@@ -11,6 +11,7 @@ import com.elements.jvmbykotlin.instructions.extended.Wide
 import com.elements.jvmbykotlin.instructions.loads.*
 import com.elements.jvmbykotlin.instructions.math.*
 import com.elements.jvmbykotlin.instructions.references.*
+import com.elements.jvmbykotlin.instructions.reserved.InvokeNative
 import com.elements.jvmbykotlin.instructions.stack.*
 import com.elements.jvmbykotlin.instructions.stores.*
 
@@ -422,7 +423,8 @@ object InstructionFactory {
             //   0xc9 ->
             // 	return &JSR_W{}
             //   0xca -> breakpoint
-            //   0xfe -> impdep1
+               0xfe ->
+                   return InvokeNative()
             //   0xff -> impdep2
             else ->
                 throw UnsupportedOperationException("Unsupported opcode $opcode")

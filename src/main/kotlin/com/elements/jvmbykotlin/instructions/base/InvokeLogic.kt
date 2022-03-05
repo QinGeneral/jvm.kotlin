@@ -15,13 +15,5 @@ object InvokeLogic {
                 nextFrame.localVariable.setSlot(i, slot)
             }
         }
-        // todo hack for native method
-        if (method.isNative()) {
-            if (method.name == "registerNatives") {
-                thread.popFrame()
-            } else {
-                throw NoSuchMethodError("Method no support ${method.yuClass.name} ${method.name} ${method.descriptor}")
-            }
-        }
     }
 }

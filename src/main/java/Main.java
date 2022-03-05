@@ -75,5 +75,23 @@ class Main implements Runnable {
         new Main().test(3);
 
         System.out.println(args.length > 0 ? args[0] : "hello kvm");
+        System.out.println(void.class.getName());
+        System.out.println(boolean.class.getName());
+        System.out.println(byte.class.getName());
+        System.out.println(char.class.getName());
+        System.out.println(short.class.getName());
+        System.out.println(int.class.getName());
+        System.out.println(long.class.getName());
+        System.out.println(float.class.getName());
+        System.out.println(double.class.getName());
+        System.out.println(Object.class.getName());
+        System.out.println(int[].class.getName());
+        System.out.println(int[][].class.getName());
+        System.out.println(Object[].class.getName());
+        System.out.println(Object[][].class.getName());
+        System.out.println(Runnable.class.getName());
+        System.out.println("abc".getClass().getName());
+        System.out.println(new double[0].getClass().getName());
+        System.out.println(new String[0].getClass().getName());
     }
 }

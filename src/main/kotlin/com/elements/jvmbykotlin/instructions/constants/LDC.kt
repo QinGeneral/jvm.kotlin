@@ -4,6 +4,7 @@ import com.elements.jvmbykotlin.classfile.entity.constantpool.FloatInfo
 import com.elements.jvmbykotlin.classfile.entity.constantpool.IntegerInfo
 import com.elements.jvmbykotlin.instructions.base.Index8Instruction
 import com.elements.jvmbykotlin.runtimedata.Frame
+import com.elements.jvmbykotlin.runtimedata.heap.ClassRef
 import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.YuString
 
@@ -28,9 +29,10 @@ class LDC : Index8Instruction() {
                     val str = InternedString.jString(cla.loader, c)
                     stack.pushRef(str)
                 }
-//                is ClassRef ->
-                // todo
-//                    stack.pushInt(c)
+                is ClassRef -> {
+                    val classObject = c.resolvedClass().jClass
+                    stack.pushRef(classObject)
+                }
                 else ->
                     throw UnsupportedOperationException("Unsupported $c")
             }

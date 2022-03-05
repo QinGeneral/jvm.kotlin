@@ -51,6 +51,14 @@ class OperandStack(val maxStack: Int) {
         return Double.fromBits(longValue)
     }
 
+    fun pushBoolean(value: Boolean) {
+        pushInt(if (value) 1 else 0)
+    }
+
+    fun popBoolean(): Boolean {
+        return popInt() == 1
+    }
+
     fun pushRef(value: YuObject?) {
         slots.push(Slot(value))
     }

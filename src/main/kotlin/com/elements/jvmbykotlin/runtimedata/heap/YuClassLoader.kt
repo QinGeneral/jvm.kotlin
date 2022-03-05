@@ -1,6 +1,7 @@
 package com.elements.jvmbykotlin.runtimedata.heap
 
 import com.elements.jvmbykotlin.classfile.ClassFile
+import com.elements.jvmbykotlin.classfile.entity.constantpool.IntegerInfo
 import com.elements.jvmbykotlin.classpath.ClassReadResult
 import com.elements.jvmbykotlin.classpath.Classpath
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
@@ -11,14 +12,54 @@ class YuClassLoader(
 ) {
     private val classMap = HashMap<String, YuClass>()
 
+    init {
+        loadBasicClasses()
+        loadPrimitiveClasses()
+    }
+
+    private fun loadBasicClasses() {
+        val jlClassClass = loadClass("java/lang/Class")
+        for (c in classMap.values) {
+            if (c.jClass == null) {
+                c.jClass = YuObject(jlClassClass, LocalVariable(jlClassClass.instanceSlotCount))
+                c.jClass!!.extra = c
+            }
+        }
+    }
+
+    private fun loadPrimitiveClasses() {
+        for (primitiveType in Constants.PRIMITIVE_TYPES.keys) {
+            loadPrimitiveClass(primitiveType)
+        }
+    }
+
+    private fun loadPrimitiveClass(className: String) {
+        val c = YuClass()
+        c.accessFlags = AccessFlagType.ACC_PUBLIC.value
+        c.name = className
+        c.loader = this
+        c.startInit()
+        val classClass = classMap["java/lang/Class"]!!
+        c.jClass = YuObject(classClass, LocalVariable(classClass.instanceSlotCount))
+        c.jClass!!.extra = c
+        classMap[className] = c
+    }
+
     fun loadClass(name: String): YuClass {
         if (name in classMap.keys) {
             return classMap[name]!!
         }
-        if (name[0] == '[') {
-            return loadArrayClass(name)
+        val c: YuClass = if (name[0] == '[') {
+            loadArrayClass(name)
+        } else {
+            loadNonArrayClass(name)
         }
-        return loadNonArrayClass(name)
+        val classClass = classMap["java/lang/Class"]
+        if (classClass != null) {
+            c.jClass = YuObject(classClass, LocalVariable(classClass.instanceSlotCount))
+            c.jClass!!.extra = c
+        }
+        return c
     }
 
     private fun loadArrayClass(name: String): YuClass {
@@ -153,8 +194,8 @@ class YuClassLoader(
         }
         when (field.descriptor) {
             "Z", "B", "C", "S", "I" -> {
-                val value = constantPool.getConstant(cpIndex) as Int
-                variables.setInt(slotId, value)
+                val value = constantPool.getConstant(cpIndex) as IntegerInfo
+                variables.setInt(slotId, value.iValue)
             }
             "J" -> {
                 val value = constantPool.getConstant(cpIndex) as Long

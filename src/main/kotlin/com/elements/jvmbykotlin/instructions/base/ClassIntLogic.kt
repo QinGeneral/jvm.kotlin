@@ -11,7 +11,7 @@ object ClassIntLogic {
         initSuperClass(yuThread, yuClass)
     }
 
-    fun scheduleClinit(yuThread: YuThread, yuClass: YuClass) {
+    private fun scheduleClinit(yuThread: YuThread, yuClass: YuClass) {
         val clinit = yuClass.getClinitMethod()
         if (clinit != null) {
             val newFrame = Frame(yuThread, clinit)
@@ -19,7 +19,7 @@ object ClassIntLogic {
         }
     }
 
-    fun initSuperClass(yuThread: YuThread, yuClass: YuClass) {
+    private fun initSuperClass(yuThread: YuThread, yuClass: YuClass) {
         if (!yuClass.isInterface()) {
             val superClass = yuClass.superClass
             if ((superClass != null) && !(superClass.isInitStarted)) {
