@@ -2,10 +2,17 @@ package com.elements.jvmbykotlin.runtimedata
 
 import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 
+/**
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.6.1">Local Variables</a>
+ */
 class LocalVariable() {
     var slots: Array<Slot> = Array(0) { Slot() }
     var maxLocals: Int = 0
 
+    /**
+     * @param maxLocals local variable array size depends on method,
+     * determined at compile time and included in the class file data for each method.
+     */
     constructor(maxLocals: Int) : this() {
         this.maxLocals = maxLocals
         this.slots = Array(maxLocals) { Slot() }
