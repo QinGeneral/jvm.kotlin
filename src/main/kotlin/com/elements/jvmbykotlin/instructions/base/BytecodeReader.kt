@@ -10,8 +10,22 @@ class BytecodeReader() {
         return b.toUByte()
     }
 
+    fun readByte(): Byte {
+        val b = code[pc]
+        pc++
+        return b
+    }
+
     fun readInt8(): Int {
         return readUInt8().toInt()
+    }
+
+    // todo
+    fun readUInt162(): Int {
+        val high = code[pc].toUByte().toInt()
+        val low = code[pc + 1].toUByte().toInt()
+        pc += 2
+        return (high shl 8) or low
     }
 
     fun readUInt16(): Int {

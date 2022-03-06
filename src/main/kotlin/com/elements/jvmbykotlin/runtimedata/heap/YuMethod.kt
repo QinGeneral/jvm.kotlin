@@ -119,6 +119,7 @@ open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAt
                         result += field[fieldIndex]
                         fieldIndex++
                         if (field[fieldIndex] == ';') {
+                            fieldIndex++
                             break
                         }
                     }

@@ -75,6 +75,22 @@ class Main implements Runnable {
         new Main().test(3);
 
         System.out.println(args.length > 0 ? args[0] : "hello kvm");
+        testClass();
+        testNative();
+    }
+
+    private static void testNative() {
+        String s1 = "abc1";
+        String s2 = "abc1";
+        System.out.println(s1 == s2);
+        int x = 1;
+        String s3 = "abc" + x;
+        System.out.println(s1 == s3);
+        s3 = s3.intern();
+        System.out.println(s1 == s3);
+    }
+
+    private static void testClass() {
         System.out.println(void.class.getName());
         System.out.println(boolean.class.getName());
         System.out.println(byte.class.getName());

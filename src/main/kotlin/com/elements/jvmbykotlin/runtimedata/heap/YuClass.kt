@@ -23,9 +23,9 @@ open class YuClass() {
 
     var isInitStarted = false
 
-    var jClass : YuObject? = null
+    var jClass: YuObject? = null
 
-    val javaName:String
+    val javaName: String
         get() {
             return name.replace("/", ".")
         }
@@ -109,9 +109,9 @@ open class YuClass() {
         if (descriptor[0] == 'L') {
             return descriptor.substring(1, descriptor.length - 1)
         }
-        for (key in Constants.PRIMITIVE_TYPES.keys) {
-            if (key == descriptor) {
-                return Constants.PRIMITIVE_TYPES[key]!!
+        for (entry in Constants.PRIMITIVE_TYPES.entries) {
+            if (entry.value == descriptor) {
+                return entry.key
             }
         }
         throw Exception("Invalid descriptor $descriptor")
@@ -134,6 +134,10 @@ open class YuClass() {
             return Constants.PRIMITIVE_TYPES[className]!!
         }
         return "L" + className + ";"
+    }
+
+    fun isPrimitive(): Boolean {
+        return name in Constants.PRIMITIVE_TYPES.keys
     }
 
     fun isArray(): Boolean {

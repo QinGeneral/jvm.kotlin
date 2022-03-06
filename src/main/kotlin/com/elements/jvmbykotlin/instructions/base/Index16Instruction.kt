@@ -5,7 +5,7 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 open class Index16Instruction : Instruction {
     var index: Int = 0
     override fun fetchOperands(bytecodeReader: BytecodeReader) {
-        index = bytecodeReader.readUInt16()
+        index = bytecodeReader.readUInt162()
     }
 
     override fun execute(frame: Frame) {

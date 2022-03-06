@@ -6,7 +6,7 @@ import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.YuClass
 
 class JavaClass {
-    fun init() {
+    init {
         Registry.register(
             "java/lang/Class",
             "getPrimitiveClass",

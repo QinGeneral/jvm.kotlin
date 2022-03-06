@@ -10,7 +10,7 @@ class IInc : NoOperationsInstruction() {
 
     override fun fetchOperands(bytecodeReader: BytecodeReader) {
         index = bytecodeReader.readInt8()
-        const = bytecodeReader.readInt8()
+        const = bytecodeReader.readByte().toInt()
     }
 
     override fun execute(frame: Frame) {

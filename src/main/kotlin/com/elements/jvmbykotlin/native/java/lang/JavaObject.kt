@@ -4,7 +4,7 @@ import com.elements.jvmbykotlin.native.Registry
 import com.elements.jvmbykotlin.runtimedata.Frame
 
 class JavaObject {
-    fun init() {
+    init {
         Registry.register(
             "java/lang/Object", "getClass", "()Ljava/lang/Class;"
         ) { frame: Frame -> getClass(frame) }

@@ -1,7 +1,6 @@
 package com.elements.jvmbykotlin.native
 
-import com.elements.jvmbykotlin.native.java.lang.JavaClass
-import com.elements.jvmbykotlin.native.java.lang.JavaObject
+import com.elements.jvmbykotlin.native.java.lang.*
 import com.elements.jvmbykotlin.runtimedata.Frame
 
 object Registry {
@@ -23,9 +22,11 @@ object Registry {
             return
         }
         val javaClass = JavaClass()
-        javaClass.init()
         val javaObject = JavaObject()
-        javaObject.init()
+        val javaSystem = JavaSystem()
+        val javaFloat = JavaFloat()
+        val javaString = JavaString()
+        val javaDouble = JavaDouble()
         isInit = true
     }
 

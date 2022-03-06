@@ -10,9 +10,6 @@ class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
 
     init {
         for (key in constantPool.items.keys) {
-            if (key == 41) {
-                println()
-            }
             val cpInfo = constantPool.items[key]
             when (cpInfo) {
                 is IntegerInfo ->
