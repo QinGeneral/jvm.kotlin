@@ -36,15 +36,16 @@ class OperandStack(val maxStack: Int) {
         return Float.fromBits(slots.pop().baseType)
     }
 
+    // todo fix the int overflow
     fun pushLong(value: Long) {
         slots.push(Slot(value.toInt()))
-        slots.push(Slot((value shr 32).toInt()))
+        slots.push(Slot((value ushr 32).toInt()))
     }
 
     fun popLong(): Long {
-        val high = slots.pop().baseType
-        val low = slots.pop().baseType
-        return (high.toLong() shl 32) or low.toLong()
+        val high = slots.pop().baseType.toLong()
+        val low = slots.pop().baseType.toLong()
+        return (high shl 32) or low
     }
 
     fun pushDouble(value: Double) {

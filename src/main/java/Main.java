@@ -1,4 +1,4 @@
-class Main implements Runnable {
+class Main implements Runnable, Cloneable {
     public float test(float r) {
         Main.staticMethod();
         Main main = new Main();
@@ -77,6 +77,27 @@ class Main implements Runnable {
         System.out.println(args.length > 0 ? args[0] : "hello kvm");
         testClass();
         testNative();
+        testHashCode();
+        testClone();
+    }
+
+    @Override
+    public Main clone() {
+        try {
+            return (Main) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private double pi1 = 3.14;
+
+    private static void testClone() {
+        Main obj1 = new Main();
+//        Main obj2 = obj1.clone();
+        obj1.pi1 = 3.1415;
+        System.out.println(obj1.pi1);
+//        System.out.println(obj2.pi1);
     }
 
     private static void testNative() {
@@ -88,6 +109,15 @@ class Main implements Runnable {
         System.out.println(s1 == s3);
         s3 = s3.intern();
         System.out.println(s1 == s3);
+    }
+
+    private static void testHashCode() {
+        Object obj1 = new Main();
+        Object obj2 = new Main();
+        System.out.println(obj1.hashCode());
+        System.out.println(obj1.toString());
+        System.out.println(obj1.equals(obj2));
+        System.out.println(obj1.equals(obj1));
     }
 
     private static void testClass() {

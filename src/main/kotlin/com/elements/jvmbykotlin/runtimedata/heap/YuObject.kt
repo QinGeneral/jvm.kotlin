@@ -28,4 +28,9 @@ open class YuObject(open val yuClass: YuClass) {
     override fun toString(): String {
         return "YuObject(yuClass=${yuClass.name}, fields=${fields.maxLocals})"
     }
+
+    // todo shallow copy
+    fun clone(): YuObject {
+        return YuObject(yuClass, fields)
+    }
 }

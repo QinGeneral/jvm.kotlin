@@ -36,7 +36,7 @@ internal class OperandStackTest {
     @Test
     fun testDoublePushPop() {
         val operandStack = OperandStack(2)
-        val value = 3.14
+        val value = 2.71828
         operandStack.pushDouble(value)
 
         assertEquals(value, operandStack.popDouble())
