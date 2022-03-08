@@ -39,7 +39,7 @@ class OperandStack(val maxStack: Int) {
     // todo fix the int overflow
     fun pushLong(value: Long) {
         slots.push(Slot(value.toInt()))
-        slots.push(Slot((value ushr 32).toInt()))
+        slots.push(Slot((value shr 32).toInt()))
     }
 
     fun popLong(): Long {

@@ -68,6 +68,15 @@ open class YuClass() {
         return YuObject(yuClass, LocalVariable(yuClass.instanceSlotCount))
     }
 
+    fun getRefVariable(fieldName: String, fieldDescriptor: String): YuObject? {
+        val field = getField(fieldName, fieldDescriptor, true)
+        return staticVariables.getRef(field!!.slotId)
+    }
+
+    fun getInstanceMethod(name: String, descriptor: String): YuMethod? {
+        return getMethod(name, descriptor, false)
+    }
+
     fun getMainMethod(): YuMethod? {
         return getStaticMethod("main", "([Ljava/lang/String;)V")
     }
@@ -261,6 +270,19 @@ open class YuClass() {
 
     fun isEnum(): Boolean {
         return (accessFlags and AccessFlagType.ACC_ENUM.value) != 0
+    }
+
+    fun getMethod(name: String, descriptor: String, isStatic: Boolean): YuMethod? {
+        var c: YuClass? = this
+        while (c != null) {
+            for (method in c.methods) {
+                if ((method.isStatic() == isStatic) && (method.name == name) && method.descriptor == descriptor) {
+                    return method
+                }
+            }
+            c = c.superClass
+        }
+        return null
     }
 
     fun getField(name: String, descriptor: String, isStatic: Boolean): YuField? {

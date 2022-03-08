@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Main implements Runnable, Cloneable {
     public float test(float r) {
         Main.staticMethod();
@@ -79,6 +82,18 @@ class Main implements Runnable, Cloneable {
         testNative();
         testHashCode();
         testClone();
+        testInteger();
+    }
+
+    private static void testInteger() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        System.out.println(list.toString());
+        for (int x : list) {
+            System.out.println(x);
+        }
     }
 
     @Override
@@ -94,10 +109,10 @@ class Main implements Runnable, Cloneable {
 
     private static void testClone() {
         Main obj1 = new Main();
-//        Main obj2 = obj1.clone();
+        Main obj2 = obj1.clone();
         obj1.pi1 = 3.1415;
         System.out.println(obj1.pi1);
-//        System.out.println(obj2.pi1);
+        System.out.println(obj2.pi1);
     }
 
     private static void testNative() {

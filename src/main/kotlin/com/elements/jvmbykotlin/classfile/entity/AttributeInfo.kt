@@ -57,6 +57,9 @@ open class AttributeInfo(open val nameIndex: UShort, open val length: UInt) {
                 "BootstrapMethods" -> {
                     return BootstrapMethodsAttribute(attrNameIndex, attrLength, classReader)
                 }
+                "LocalVariableTypeTable" -> {
+                    return LocalVariableTypeTable(attrNameIndex, attrLength, classReader)
+                }
             }
             return AttributeInfo(attrNameIndex, attrLength)
         }

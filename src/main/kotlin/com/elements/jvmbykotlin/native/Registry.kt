@@ -27,6 +27,7 @@ object Registry {
         val javaFloat = JavaFloat()
         val javaString = JavaString()
         val javaDouble = JavaDouble()
+        val javaVM = JavaVM()
         isInit = true
     }
 
