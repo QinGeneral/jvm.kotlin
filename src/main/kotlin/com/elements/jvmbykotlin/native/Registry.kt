@@ -28,6 +28,7 @@ object Registry {
         val javaString = JavaString()
         val javaDouble = JavaDouble()
         val javaVM = JavaVM()
+        val javaThrowable = JavaThrowable()
         isInit = true
     }
 

@@ -65,7 +65,7 @@ class InvokeVirtual : Index16Instruction() {
                     println("InvokeVirtual println ${stack.popDouble()}")
                 "(Ljava/lang/String;)V" -> {
                     val jStr = stack.popRef()
-                    val str = InternedString.string(jStr!!)
+                    val str = if (jStr == null) "null" else InternedString.string(jStr)
                     println("InvokeVirtual println $str")
                 }
                 else ->

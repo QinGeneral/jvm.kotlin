@@ -30,6 +30,16 @@ class LineNumberTableAttribute(
         }
     }
 
+    fun getLineNumber(pc: Int): Int {
+        for (i in (lineNumberTableLength.toInt() - 1) downTo 0) {
+            val item = lineNumberTable[i]
+            if (pc >= item.startPC.toInt()) {
+                return item.lineNumber.toInt()
+            }
+        }
+        return -1
+    }
+
     class LineNumberTableItem(
         classReader: ClassReader
     ) {

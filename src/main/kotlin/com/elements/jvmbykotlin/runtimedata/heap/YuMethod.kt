@@ -3,6 +3,7 @@ package com.elements.jvmbykotlin.runtimedata.heap
 import com.elements.jvmbykotlin.classfile.entity.MemberInfo
 import com.elements.jvmbykotlin.classfile.entity.MethodInfo
 import com.elements.jvmbykotlin.classfile.entity.attribute.CodeAttribute
+import com.elements.jvmbykotlin.classfile.entity.attribute.LineNumberTableAttribute
 import java.lang.IllegalArgumentException
 
 open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAttribute?) :
@@ -11,17 +12,39 @@ open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAt
     var maxLocals: Int = 0
     var code: ByteArray = ByteArray(0)
     var argSlotCount: Int = 0
+    var exceptionTable: YuExceptionTable? = null
+    var lineNumberTable: LineNumberTableAttribute? = null
 
     init {
         if (attributes != null) {
             maxStack = attributes.maxStack.toInt()
             maxLocals = attributes.maxLocals.toInt()
             code = attributes.code
+            exceptionTable = YuExceptionTable(attributes.exceptionTable, yuClass.constantPool)
+            lineNumberTable = attributes.getLineNumberTable()
         }
         val methodDescriptor = calcArgSlotCount()
         if (isNative()) {
             injectCodeAttribute(methodDescriptor.returnType)
         }
+    }
+
+    fun getLineNumber(pc: Int): Int {
+        if (isNative()) {
+            return -2
+        }
+        if (lineNumberTable == null) {
+            return -1
+        }
+        return lineNumberTable!!.getLineNumber(pc)
+    }
+
+    fun findExceptionHandler(exceptionClass: YuClass, pc: Int): Int {
+        if (exceptionTable == null) {
+            return -1
+        }
+        val handler = exceptionTable!!.findExceptionHandler(exceptionClass, pc) ?: return -1
+        return handler.handlerPC
     }
 
     /**

@@ -355,9 +355,9 @@ object InstructionFactory {
             0xa7 ->
                 return Goto()
             //   0xa8 ->
-            // 	return &JSR{}
+            // 	return JSR()
             //   0xa9 ->
-            // 	return &RET{}
+            // 	return RET()
             0xaa ->
                 return TableSwitch()
             0xab ->
@@ -400,8 +400,8 @@ object InstructionFactory {
                 return ANewArray()
             0xbe ->
                 return ArrayLength()
-            //   0xbf ->
-            // 	return athrow
+            0xbf ->
+                return AThrow()
             0xc0 ->
                 return CheckCast()
             0xc1 ->
@@ -421,10 +421,10 @@ object InstructionFactory {
             0xc8 ->
                 return GotoWidely()
             //   0xc9 ->
-            // 	return &JSR_W{}
+            // 	return JSR_W()
             //   0xca -> breakpoint
-               0xfe ->
-                   return InvokeNative()
+            0xfe ->
+                return InvokeNative()
             //   0xff -> impdep2
             else ->
                 throw UnsupportedOperationException("Unsupported opcode $opcode")

@@ -24,6 +24,7 @@ open class YuClass() {
     var isInitStarted = false
 
     var jClass: YuObject? = null
+    var sourceFile: String = "Unknow"
 
     val javaName: String
         get() {
@@ -38,6 +39,7 @@ open class YuClass() {
         this.constantPool = YuConstantPool(this, classFile.constantPool)
         this.fields = YuField.getFields(this, classFile.fieldsInfo)
         this.methods = YuMethod.getMethods(this, classFile.methods)
+        this.sourceFile = getSourceFile(classFile)
     }
 
     constructor(
@@ -58,6 +60,14 @@ open class YuClass() {
 
     fun startInit() {
         isInitStarted = true
+    }
+
+    fun getSourceFile(classFile: ClassFile): String {
+        val sourceFileAttribute = classFile.getSourceFileAttribute()
+        if (sourceFileAttribute != null) {
+            return sourceFileAttribute.getFileName(classFile.constantPool)
+        }
+        return "Unknow"
     }
 
     fun getClinitMethod(): YuMethod? {

@@ -53,4 +53,8 @@ class YuThread(
         }
         return stack.peek()
     }
+
+    fun clearStack() {
+        stack.clear()
+    }
 }

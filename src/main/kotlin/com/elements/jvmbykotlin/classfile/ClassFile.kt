@@ -3,6 +3,7 @@ package com.elements.jvmbykotlin.classfile
 import com.elements.jvmbykotlin.classfile.entity.AttributeInfo
 import com.elements.jvmbykotlin.classfile.entity.FieldInfo
 import com.elements.jvmbykotlin.classfile.entity.MethodInfo
+import com.elements.jvmbykotlin.classfile.entity.attribute.SourceFileAttribute
 import com.elements.jvmbykotlin.classfile.entity.constantpool.ClassInfo
 import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantPool
 import com.elements.jvmbykotlin.classfile.entity.constantpool.ConstantType
@@ -164,6 +165,15 @@ class ClassFile {
         constantPoolCount = classReader.readU2()
         println("constant pool count $constantPoolCount")
         constantPool = ConstantPool.of(constantPoolCount.toInt(), classReader)
+    }
+
+    fun getSourceFileAttribute(): SourceFileAttribute? {
+        for (attributeInfo in attributes) {
+            if (attributeInfo is SourceFileAttribute) {
+                return attributeInfo
+            }
+        }
+        return null
     }
 
     override fun toString(): String {

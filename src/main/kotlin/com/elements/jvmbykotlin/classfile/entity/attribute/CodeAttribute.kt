@@ -35,6 +35,15 @@ class CodeAttribute(
         }
     }
 
+    fun getLineNumberTable(): LineNumberTableAttribute? {
+        for (attribute in attributes) {
+            if (attribute is LineNumberTableAttribute) {
+                return attribute
+            }
+        }
+        return null
+    }
+
     class ExceptionTableItem(
         classReader: ClassReader
     ) {

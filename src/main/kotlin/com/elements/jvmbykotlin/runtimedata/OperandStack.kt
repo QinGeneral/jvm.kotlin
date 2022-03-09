@@ -78,6 +78,10 @@ class OperandStack(val maxStack: Int) {
         return slots[slots.size - n - 1].referenceType
     }
 
+    fun clear() {
+        slots.clear()
+    }
+
     override fun toString(): String {
         return "OperandStack maxStack=$maxStack, slots=\n${slots.joinToString("\n")}"
     }

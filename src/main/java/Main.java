@@ -77,12 +77,29 @@ class Main implements Runnable, Cloneable {
 
         new Main().test(3);
 
-        System.out.println(args.length > 0 ? args[0] : "hello kvm");
+//        System.out.println(args.length > 0 ? args[0] : "hello kvm");
         testClass();
         testNative();
         testHashCode();
         testClone();
         testInteger();
+        testException(args);
+    }
+
+    private static void testException(String[] args) {
+        try {
+            testException2(args);
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void testException2(String[] args) {
+        if (args.length == 0) {
+            throw new IndexOutOfBoundsException("no args");
+        }
+        int x = Integer.parseInt(args[0]);
+        System.out.println(x);
     }
 
     private static void testInteger() {
