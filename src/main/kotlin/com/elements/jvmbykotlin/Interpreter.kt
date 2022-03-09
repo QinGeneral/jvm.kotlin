@@ -11,20 +11,13 @@ import com.elements.jvmbykotlin.runtimedata.heap.YuClassLoader
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
 class Interpreter {
-    fun interpret(method: YuMethod, isLogInstruction: Boolean, args: ArrayList<String>) {
-        println("interpret ${method.name}")
-        val thread = YuThread()
-        val frame = Frame(thread, method)
-        thread.pushFrame(frame)
-
-        val jArgs = createArgsArray(method.yuClass.loader, args)
-        frame.localVariable.setRef(0, jArgs)
-
+    fun interpret(mainThread: YuThread, isLogInstruction: Boolean) {
+        println("interpret")
         try {
-            loop(thread, isLogInstruction)
+            loop(mainThread, isLogInstruction)
         } catch (e: Exception) {
             e.printStackTrace()
-            logFrames(thread)
+            logFrames(mainThread)
         }
     }
 
@@ -55,16 +48,6 @@ class Interpreter {
                 break
             }
         }
-    }
-
-    private fun createArgsArray(yuClassLoader: YuClassLoader, args: ArrayList<String>): ArrayObject {
-        val stringClass = yuClassLoader.loadClass("java/lang/String")
-        val argsArray = ArrayObject.of(stringClass.getArrayClass(), args.size)
-        val jArgs = argsArray.refs()
-        for (i in 0 until args.size) {
-            jArgs[i] = InternedString.jString(yuClassLoader, args[i])
-        }
-        return argsArray
     }
 
     private fun logFrames(thread: YuThread) {

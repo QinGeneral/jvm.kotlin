@@ -83,6 +83,11 @@ open class YuClass() {
         return staticVariables.getRef(field!!.slotId)
     }
 
+    fun setRefVariable(fieldName: String, fieldDescriptor: String, ref: YuObject?) {
+        val field = getField(fieldName, fieldDescriptor, true)
+        staticVariables.setRef(field!!.slotId, ref)
+    }
+
     fun getInstanceMethod(name: String, descriptor: String): YuMethod? {
         return getMethod(name, descriptor, false)
     }

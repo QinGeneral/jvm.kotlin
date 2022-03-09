@@ -24,7 +24,7 @@ internal class CmdTest {
     @Test
     fun testStartVM() {
         // WHEN
-        Main.startJVM(cmd)
+        JVM(cmd).start()
     }
 
     @Test
