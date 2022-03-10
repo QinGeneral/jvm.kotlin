@@ -10,9 +10,19 @@ import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.YuClassLoader
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
+/**
+ * Execute bytecode by interpret
+ *
+ * @author hanzhang
+ */
 class Interpreter {
+    /**
+     * execute the methods in thread
+     *
+     * @param mainThread thread
+     * @param isLogInstruction if print the log to console
+     */
     fun interpret(mainThread: YuThread, isLogInstruction: Boolean) {
-        println("interpret")
         try {
             loop(mainThread, isLogInstruction)
         } catch (e: Exception) {
@@ -21,6 +31,12 @@ class Interpreter {
         }
     }
 
+    /**
+     * loop to execute methods
+     *
+     * @param thread current thread
+     * @param isLogInstruction if print the log
+     */
     private fun loop(thread: YuThread, isLogInstruction: Boolean) {
         val reader = BytecodeReader()
         println("============================================")
@@ -50,6 +66,11 @@ class Interpreter {
         }
     }
 
+    /**
+     * print the frame info
+     *
+     * @param thread current thread
+     */
     private fun logFrames(thread: YuThread) {
         while (!thread.isStackEmpty()) {
             val frame = thread.popFrame()
@@ -59,6 +80,12 @@ class Interpreter {
         }
     }
 
+    /**
+     * print the instruction info
+     *
+     * @param frame current executing method's frame
+     * @param instruction current instruction in method
+     */
     private fun logInstruction(frame: Frame, instruction: Instruction) {
         val method = frame.method
         val className = method.yuClass.name

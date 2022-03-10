@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.classpath
 
 import java.io.File
 
+/**
+ * get class reader by type
+ *
+ * @author hanzhang
+ */
 class EntryFactory {
     companion object {
         private val pathSeparator: String = File.pathSeparator

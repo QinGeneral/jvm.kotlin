@@ -3,6 +3,13 @@ package com.elements.jvmbykotlin.classpath
 import java.io.File
 import java.nio.file.Paths
 
+/**
+ * Read class file in jre, user class path
+ *
+ * @author hanzhang
+ * @param jrePathOption user's jre path
+ * @param classpathOption user's class path
+ */
 class Classpath(jrePathOption: String?, classpathOption: String?) {
     lateinit var bootClasspath: IEntry
     lateinit var extClasspath: IEntry
@@ -13,6 +20,12 @@ class Classpath(jrePathOption: String?, classpathOption: String?) {
         parseUserClasspath(classpathOption)
     }
 
+    /**
+     * read class by class name
+     *
+     * @param classname class name
+     * @return class data in byte
+     */
     fun readClass(classname: String): ClassReadResult {
         val cn = "$classname.class"
         var result = bootClasspath.readClass(cn)
@@ -26,6 +39,11 @@ class Classpath(jrePathOption: String?, classpathOption: String?) {
         return userClasspath.readClass(cn)
     }
 
+    /**
+     * read class file in user class path
+     *
+     * @param classpathOption user's class path
+     */
     private fun parseUserClasspath(classpathOption: String?) {
         var classpath = "."
         if (isFileExists(classpathOption)) {
@@ -34,6 +52,9 @@ class Classpath(jrePathOption: String?, classpathOption: String?) {
         userClasspath = EntryFactory.getEntry(classpath)
     }
 
+    /**
+     * get boot and ext class path in jre
+     */
     private fun parseBootAndExtClasspath(jrePathOption: String?) {
         val jreDir = getJREDir(jrePathOption)
 
@@ -46,6 +67,9 @@ class Classpath(jrePathOption: String?, classpathOption: String?) {
         extClasspath = WildcardEntry(jreExtPath)
     }
 
+    /**
+     * get jre dir
+     */
     private fun getJREDir(jrePathOption: String?): String {
         if (isFileExists(jrePathOption)) {
             return jrePathOption!!

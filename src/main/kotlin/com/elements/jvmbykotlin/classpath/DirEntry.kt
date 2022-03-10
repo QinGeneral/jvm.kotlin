@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.classpath
 
 import java.io.File
 
+/**
+ * read class in dir
+ *
+ * @author hanzhang
+ */
 class DirEntry(private val classPath: String) : IEntry {
     override fun readClass(classname: String): ClassReadResult {
         try {

@@ -1,17 +1,23 @@
 package com.elements.jvmbykotlin
 
 import com.elements.jvmbykotlin.classpath.Classpath
-import com.elements.jvmbykotlin.instructions.base.ClassIntLogic
+import com.elements.jvmbykotlin.instructions.base.ClassInitLogic
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.YuThread
 import com.elements.jvmbykotlin.runtimedata.heap.ArrayObject
 import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.YuClassLoader
 
-class JVM(val cmd: Cmd) {
-    val classloader: YuClassLoader
-    val mainThread: YuThread
-    val interpreter = Interpreter()
+/**
+ * jvm.kotlin
+ *
+ * @author hanzhang
+ * @param cmd parsed command
+ */
+class JVM(private val cmd: Cmd) {
+    private val classloader: YuClassLoader
+    private val mainThread: YuThread
+    private val interpreter = Interpreter()
 
     init {
         val classpath = Classpath(cmd.jrePathOption, cmd.classPathOption)
@@ -19,22 +25,26 @@ class JVM(val cmd: Cmd) {
         mainThread = YuThread()
     }
 
-
-    fun startJVM() {
-
-    }
-
+    /**
+     * start the vm
+     */
     fun start() {
         initVM()
         executeMain()
     }
 
+    /**
+     * init vm, invoke VM method to init some Java Class
+     */
     private fun initVM() {
         val vmClass = classloader.loadClass("sun/misc/VM")
-        ClassIntLogic.initClass(mainThread, vmClass)
+        ClassInitLogic.initClass(mainThread, vmClass)
         interpreter.interpret(mainThread, cmd.versionFlag)
     }
 
+    /**
+     * execute main method in Java Class
+     */
     private fun executeMain() {
         val classname = cmd.className.replace(".", "/")
         val mainClass = classloader.loadClass(classname)
@@ -57,6 +67,12 @@ class JVM(val cmd: Cmd) {
         interpreter.interpret(mainThread, cmd.verbose)
     }
 
+    /**
+     * convert command args to Java main method args
+     *
+     * @param args command args
+     * @return ArrayObject in jvm.kotlin
+     */
     private fun createArgsArray(args: ArrayList<String>): ArrayObject {
         val stringClass = classloader.loadClass("java/lang/String")
         val argsArray = ArrayObject.of(stringClass.getArrayClass(), args.size)

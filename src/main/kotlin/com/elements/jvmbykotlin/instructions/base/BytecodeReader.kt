@@ -1,5 +1,10 @@
 package com.elements.jvmbykotlin.instructions.base
 
+/**
+ * Code byte reader
+ *
+ * @author hanzhang
+ */
 class BytecodeReader() {
     lateinit var code: ByteArray
     var pc: Int = 0

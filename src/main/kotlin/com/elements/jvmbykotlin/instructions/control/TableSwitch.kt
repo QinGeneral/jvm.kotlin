@@ -5,6 +5,12 @@ import com.elements.jvmbykotlin.instructions.base.BytecodeReader
 import com.elements.jvmbykotlin.instructions.base.Instruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
+/**
+ * Go to target pc by key
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.tableswitch">tableswitch</a>
+ *
+ * @author hanzhang
+ */
 class TableSwitch : Instruction {
     val DEFAULT_OFFSET: Int = 0
     var low: Int = 0

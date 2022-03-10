@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.classpath
 
 import java.io.File
 
+/**
+ * class reader for jar
+ *
+ * @author hanzhang
+ */
 class WildcardEntry(classPath: String) : IEntry {
     private var entries: ArrayList<IEntry> = ArrayList()
     private val baseDir: String

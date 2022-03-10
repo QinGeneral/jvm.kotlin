@@ -4,13 +4,30 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.YuThread
 import com.elements.jvmbykotlin.runtimedata.heap.YuClass
 
-object ClassIntLogic {
+/**
+ * init the class: invoke clinit method and init super class
+ *
+ * @author hanzhang
+ */
+object ClassInitLogic {
+    /**
+     * init class
+     *
+     * @param yuThread current thread
+     * @param yuClass current class
+     */
     fun initClass(yuThread: YuThread, yuClass: YuClass) {
         yuClass.startInit()
         scheduleClinit(yuThread, yuClass)
         initSuperClass(yuThread, yuClass)
     }
 
+    /**
+     * invoke clinit method
+     *
+     * @param yuThread current thread
+     * @param yuClass current class
+     */
     private fun scheduleClinit(yuThread: YuThread, yuClass: YuClass) {
         val clinit = yuClass.getClinitMethod()
         if (clinit != null) {
@@ -19,6 +36,12 @@ object ClassIntLogic {
         }
     }
 
+    /**
+     * init super class
+     *
+     * @param yuThread current thread
+     * @param yuClass current class
+     */
     private fun initSuperClass(yuThread: YuThread, yuClass: YuClass) {
         if (!yuClass.isInterface()) {
             val superClass = yuClass.superClass

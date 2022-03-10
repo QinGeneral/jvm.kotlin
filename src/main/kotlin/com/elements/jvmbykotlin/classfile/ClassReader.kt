@@ -1,6 +1,10 @@
 package com.elements.jvmbykotlin.classfile
 
-
+/**
+ * read n bytes in class file
+ *
+ * @author hanzhang
+ */
 class ClassReader(data: ByteArray) {
     var index = 0
     private val data: ByteArray
@@ -49,7 +53,6 @@ class ClassReader(data: ByteArray) {
             byteArray[i] = data[index]
             index++
         }
-//        println("readByteArray $size ${byteArray.toList()}")
         return byteArray
     }
 }

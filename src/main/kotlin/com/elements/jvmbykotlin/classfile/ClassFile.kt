@@ -78,6 +78,11 @@ class ClassFile {
                 .toList()
         }
 
+    /**
+     * parse from byte in .class file
+     *
+     * @param classData class data in byte
+     */
     fun parse(classData: ByteArray) {
         val classReader = ClassReader(classData)
         parserMagic(classReader)
@@ -95,6 +100,11 @@ class ClassFile {
         parseAttributes(classReader)
     }
 
+    /**
+     * parse attribute
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parseAttributes(classReader: ClassReader) {
         attributesCount = classReader.readU2()
         println("attributes count $attributesCount")
@@ -105,6 +115,11 @@ class ClassFile {
         }
     }
 
+    /**
+     * parse major version and minor version
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parserVersion(classReader: ClassReader) {
         minorVersion = classReader.readU2()
         majorVersion = classReader.readU2()
@@ -122,6 +137,11 @@ class ClassFile {
         throw UnsupportedClassVersionError("version not support $minorVersion $majorVersion")
     }
 
+    /**
+     * parse java magic: CAFE BABE
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parserMagic(classReader: ClassReader) {
         magic = classReader.readU4String()
         println("magic $magic")
@@ -130,6 +150,11 @@ class ClassFile {
         }
     }
 
+    /**
+     * parse methods
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parseMethods(classReader: ClassReader) {
         methodsCount = classReader.readU2()
         println("methodsCount count $methodsCount")
@@ -140,6 +165,11 @@ class ClassFile {
         }
     }
 
+    /**
+     * parse fields
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parseFields(classReader: ClassReader) {
         fieldsCount = classReader.readU2()
         println("fieldsCount count $fieldsCount")
@@ -150,6 +180,11 @@ class ClassFile {
         }
     }
 
+    /**
+     * parse interfaces
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parseInterfaces(classReader: ClassReader) {
         interfacesCount = classReader.readU2()
         println("interfaces count $interfacesCount")
@@ -161,19 +196,24 @@ class ClassFile {
         }
     }
 
+    /**
+     * parse constant pool
+     *
+     * @param classReader class bytecode reader
+     */
     private fun parseConstantPool(classReader: ClassReader) {
         constantPoolCount = classReader.readU2()
         println("constant pool count $constantPoolCount")
         constantPool = ConstantPool.of(constantPoolCount.toInt(), classReader)
     }
 
+    /**
+     * get source file attribute
+     *
+     * @return source file attribute
+     */
     fun getSourceFileAttribute(): SourceFileAttribute? {
-        for (attributeInfo in attributes) {
-            if (attributeInfo is SourceFileAttribute) {
-                return attributeInfo
-            }
-        }
-        return null
+        return attributes.filterIsInstance<SourceFileAttribute>().firstOrNull()
     }
 
     override fun toString(): String {

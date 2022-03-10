@@ -3,6 +3,12 @@ package com.elements.jvmbykotlin.instructions.comparisons
 import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
+/**
+ * Compare double
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.dcmp_op">dcmp_op</a>
+ *
+ * @author hanzhang
+ */
 class DCmp : NoOperationsInstruction() {
     companion object {
         fun dcmp(frame: Frame, gFlag: Boolean) {
@@ -21,5 +27,17 @@ class DCmp : NoOperationsInstruction() {
                 stack.pushInt(-1)
             }
         }
+    }
+}
+
+class DCmpG : NoOperationsInstruction() {
+    override fun execute(frame: Frame) {
+        DCmp.dcmp(frame, true)
+    }
+}
+
+class DCmpL : NoOperationsInstruction() {
+    override fun execute(frame: Frame) {
+        DCmp.dcmp(frame, false)
     }
 }

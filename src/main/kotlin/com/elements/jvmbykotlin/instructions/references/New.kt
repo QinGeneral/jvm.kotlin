@@ -1,6 +1,6 @@
 package com.elements.jvmbykotlin.instructions.references
 
-import com.elements.jvmbykotlin.instructions.base.ClassIntLogic
+import com.elements.jvmbykotlin.instructions.base.ClassInitLogic
 import com.elements.jvmbykotlin.instructions.base.Index16Instruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.ClassRef
@@ -15,7 +15,7 @@ class New : Index16Instruction() {
         }
         if (!c.isInitStarted) {
             frame.revertNextPC()
-            ClassIntLogic.initClass(frame.thread, c)
+            ClassInitLogic.initClass(frame.thread, c)
             return
         }
         val ref = c.createObject(c)

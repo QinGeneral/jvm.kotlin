@@ -4,6 +4,11 @@ import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Paths
 
+/**
+ * class reader for zip
+ *
+ * @author hanzhang
+ */
 class ZipEntry(private val classPath: String) : IEntry {
     override fun readClass(classname: String): ClassReadResult {
         val absPath = Paths.get(classPath).toAbsolutePath()

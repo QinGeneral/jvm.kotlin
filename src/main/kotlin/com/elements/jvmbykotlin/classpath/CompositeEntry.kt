@@ -1,5 +1,10 @@
 package com.elements.jvmbykotlin.classpath
 
+/**
+ * composite class reader
+ *
+ * @author hanzhang
+ */
 open class CompositeEntry(classPath: String) : IEntry {
     private var entries: ArrayList<IEntry> = ArrayList()
 

@@ -4,7 +4,6 @@ import com.elements.jvmbykotlin.instructions.comparisons.*
 import com.elements.jvmbykotlin.instructions.constants.*
 import com.elements.jvmbykotlin.instructions.control.*
 import com.elements.jvmbykotlin.instructions.conversions.*
-import com.elements.jvmbykotlin.instructions.extended.GotoWidely
 import com.elements.jvmbykotlin.instructions.extended.IfNonNull
 import com.elements.jvmbykotlin.instructions.extended.IfNull
 import com.elements.jvmbykotlin.instructions.extended.Wide
@@ -15,11 +14,16 @@ import com.elements.jvmbykotlin.instructions.reserved.InvokeNative
 import com.elements.jvmbykotlin.instructions.stack.*
 import com.elements.jvmbykotlin.instructions.stores.*
 
+/**
+ * Instruction factory, create instruction by opcode
+ *
+ * @author hanzhang
+ */
 object InstructionFactory {
     fun create(opcode: Int): Instruction {
         when (opcode) {
             0x00 ->
-                return NoOperationsInstruction()
+                return Nop()
             0x01 ->
                 return AConstNull()
             0x02 ->
@@ -419,7 +423,7 @@ object InstructionFactory {
             0xc7 ->
                 return IfNonNull()
             0xc8 ->
-                return GotoWidely()
+                return GotoWide()
             //   0xc9 ->
             // 	return JSR_W()
             //   0xca -> breakpoint

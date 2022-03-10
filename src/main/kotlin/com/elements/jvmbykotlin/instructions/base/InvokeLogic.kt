@@ -3,6 +3,11 @@ package com.elements.jvmbykotlin.instructions.base
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
+/**
+ * Method execute logic, push method's frame and set parameter
+ *
+ * @author hanzhang
+ */
 object InvokeLogic {
     fun invokeMethod(invokeFrame: Frame, method: YuMethod) {
         val thread = invokeFrame.thread
