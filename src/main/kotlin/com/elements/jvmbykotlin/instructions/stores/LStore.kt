@@ -4,6 +4,13 @@ import com.elements.jvmbykotlin.instructions.base.Index8Instruction
 import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
+/**
+ * Store long in operand stack to local variable
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.lstore">lstore</a>
+ *
+ * @author hanzhang
+ * @since 2022-02-24
+ */
 class LStore : Index8Instruction() {
     companion object {
         fun lStore(frame: Frame, index: Int) {

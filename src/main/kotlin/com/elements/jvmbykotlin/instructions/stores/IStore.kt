@@ -5,9 +5,11 @@ import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
 /**
- * Instruction store integer
+ * Store int in operand stack to local variable
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.istore">istore</a>
  *
- * Store integer from operand stack to local variables
+ * @author hanzhang
+ * @since 2022-02-24
  */
 class IStore : Index8Instruction() {
     companion object {
