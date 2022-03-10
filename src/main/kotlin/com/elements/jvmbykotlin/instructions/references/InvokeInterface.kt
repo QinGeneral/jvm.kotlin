@@ -7,6 +7,12 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.ref.InterfaceMethodRef
 import com.elements.jvmbykotlin.runtimedata.heap.ref.MethodRef
 
+/**
+ * Invoke method in interface
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.invokeinterface">invokeinterface</a>
+ *
+ * @author hanzhang
+ */
 class InvokeInterface : Instruction {
     var index: Int = 0
     override fun fetchOperands(bytecodeReader: BytecodeReader) {

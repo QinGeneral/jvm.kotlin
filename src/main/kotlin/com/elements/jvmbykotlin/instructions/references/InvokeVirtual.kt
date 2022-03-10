@@ -6,6 +6,12 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.ref.MethodRef
 
+/**
+ * Invoke instance method which is not privite
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.invokevirtual">invokevirtual</a>
+ *
+ * @author hanzhang
+ */
 class InvokeVirtual : Index16Instruction() {
     override fun execute(frame: Frame) {
         val currentClass = frame.method.yuClass

@@ -8,6 +8,12 @@ import com.elements.jvmbykotlin.runtimedata.heap.YuClass
 import com.elements.jvmbykotlin.runtimedata.heap.YuClassLoader
 import java.lang.Exception
 
+/**
+ * Create base type array object
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.newarray">newarray</a>
+ *
+ * @author hanzhang
+ */
 class NewArray : Instruction {
     enum class ArrayType(val value: Int) {
         BOOLEAN(4),

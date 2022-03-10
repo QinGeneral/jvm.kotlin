@@ -4,6 +4,12 @@ import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.ArrayObject
 
+/**
+ * Store array to local variable
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.aastore">aastore</a>
+ *
+ * @author hanzhang
+ */
 class AAStore : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
         val stack = frame.operandStack

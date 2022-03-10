@@ -3,42 +3,40 @@ package com.elements.jvmbykotlin.instructions.math
 import com.elements.jvmbykotlin.instructions.base.NoOperationsInstruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 
-class IADD : NoOperationsInstruction() {
+/**
+ * Get negative value
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.ineg">ineg</a>
+ *
+ * @author hanzhang
+ */
+class INEG : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
         val stack = frame.operandStack
-        val v2 = stack.popInt()
         val v1 = stack.popInt()
-        val result = v1 + v2
-        stack.pushInt(result)
+        stack.pushInt(-v1)
     }
 }
 
-class LADD : NoOperationsInstruction() {
+class LNEG : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
         val stack = frame.operandStack
-        val v2 = stack.popLong()
         val v1 = stack.popLong()
-        val result = v1 + v2
-        stack.pushLong(result)
+        stack.pushLong(-v1)
     }
 }
 
-class FADD : NoOperationsInstruction() {
+class FNEG : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
         val stack = frame.operandStack
-        val v2 = stack.popFloat()
         val v1 = stack.popFloat()
-        val result = v1 + v2
-        stack.pushFloat(result)
+        stack.pushFloat(-v1)
     }
 }
 
-class DADD : NoOperationsInstruction() {
+class DNEG : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
         val stack = frame.operandStack
-        val v2 = stack.popDouble()
         val v1 = stack.popDouble()
-        val result = v1 + v2
-        stack.pushDouble(result)
+        stack.pushDouble(-v1)
     }
 }

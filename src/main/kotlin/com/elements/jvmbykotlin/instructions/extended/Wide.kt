@@ -8,6 +8,12 @@ import com.elements.jvmbykotlin.instructions.math.IInc
 import com.elements.jvmbykotlin.instructions.stores.*
 import com.elements.jvmbykotlin.runtimedata.Frame
 
+/**
+ * Extend instruction to wide
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.wide">wide</a>
+ *
+ * @author hanzhang
+ */
 class Wide : Instruction {
     lateinit var modifiedInstruction: Instruction
 

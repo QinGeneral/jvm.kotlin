@@ -6,6 +6,12 @@ import com.elements.jvmbykotlin.runtimedata.YuThread
 import com.elements.jvmbykotlin.runtimedata.heap.InternedString
 import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 
+/**
+ * Throw a exception
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.athrow">athrow</a>
+ *
+ * @author hanzhang
+ */
 class AThrow : NoOperationsInstruction() {
     override fun execute(frame: Frame) {
         val exception = frame.operandStack.popRef() ?: throw NullPointerException()

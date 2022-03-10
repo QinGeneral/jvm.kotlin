@@ -5,6 +5,12 @@ import com.elements.jvmbykotlin.instructions.base.Index16Instruction
 import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.ref.FieldRef
 
+/**
+ * Put static value to field in class
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.putstatic">putstatic</a>
+ *
+ * @author hanzhang
+ */
 class PutStatic : Index16Instruction() {
     override fun execute(frame: Frame) {
         val curMethod = frame.method

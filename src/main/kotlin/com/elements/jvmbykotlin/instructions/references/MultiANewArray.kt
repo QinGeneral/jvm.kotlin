@@ -8,6 +8,12 @@ import com.elements.jvmbykotlin.runtimedata.heap.ArrayObject
 import com.elements.jvmbykotlin.runtimedata.heap.ClassRef
 import com.elements.jvmbykotlin.runtimedata.heap.YuClass
 
+/**
+ * Create multi array object
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.multianewarray">multianewarray</a>
+ *
+ * @author hanzhang
+ */
 class MultiANewArray : Instruction {
     var index: Int = 0
     var dimensions: Int = 0

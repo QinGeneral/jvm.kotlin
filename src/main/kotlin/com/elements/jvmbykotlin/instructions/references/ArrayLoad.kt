@@ -5,6 +5,12 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.ArrayObject
 import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 
+/**
+ * Load array to operand stack
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.aaload">aaload</a>
+ *
+ * @author hanzhang
+ */
 object ArrayLoad {
     fun checkNotNull(arrayRef: YuObject?) {
         if (arrayRef == null) {

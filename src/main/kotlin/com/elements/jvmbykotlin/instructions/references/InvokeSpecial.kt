@@ -6,6 +6,12 @@ import com.elements.jvmbykotlin.runtimedata.Frame
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 import com.elements.jvmbykotlin.runtimedata.heap.ref.MethodRef
 
+/**
+ * Invoke constructor or private instance method
+ * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.10.1.9.invokespecial">invokespecial</a>
+ *
+ * @author hanzhang
+ */
 class InvokeSpecial : Index16Instruction() {
     override fun execute(frame: Frame) {
         val currentClass = frame.method.yuClass
