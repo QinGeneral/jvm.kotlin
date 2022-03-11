@@ -25,28 +25,24 @@ class LStore : Index8Instruction() {
 }
 
 class LStore0 : NoOperationsInstruction() {
-
     override fun execute(frame: Frame) {
         LStore.lStore(frame, 0)
     }
 }
 
 class LStore1 : NoOperationsInstruction() {
-
     override fun execute(frame: Frame) {
         LStore.lStore(frame, 1)
     }
 }
 
 class LStore2 : NoOperationsInstruction() {
-
     override fun execute(frame: Frame) {
         LStore.lStore(frame, 2)
     }
 }
 
 class LStore3 : NoOperationsInstruction() {
-
     override fun execute(frame: Frame) {
         LStore.lStore(frame, 3)
     }

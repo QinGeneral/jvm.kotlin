@@ -1,5 +1,10 @@
 package com.elements.jvmbykotlin.runtimedata.heap
 
+/**
+ * Java array object in run time
+ *
+ * @author hanzhang
+ */
 class ArrayObject(override val yuClass: YuClass, val data: Any) : YuObject(yuClass) {
     companion object {
         fun of(yuClass: YuClass, count: Int): ArrayObject {

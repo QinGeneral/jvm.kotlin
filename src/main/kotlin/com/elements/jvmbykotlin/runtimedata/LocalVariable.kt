@@ -3,7 +3,11 @@ package com.elements.jvmbykotlin.runtimedata
 import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 
 /**
+ * LocalVariable in Java stack
+ *
  * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.6.1">Local Variables</a>
+ *
+ * @author hanzhang
  */
 class LocalVariable() {
     var slots: Array<Slot> = Array(0) { Slot() }

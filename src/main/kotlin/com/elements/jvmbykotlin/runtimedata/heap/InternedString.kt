@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.runtimedata.heap
 
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
+/**
+ * Java string pool for reuse string
+ *
+ * @author hanzhang
+ */
 object InternedString {
     private val internedString = mutableMapOf<String, YuObject>()
 

@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.runtimedata.heap
 
 import com.elements.jvmbykotlin.classfile.entity.attribute.CodeAttribute
 
+/**
+ * Java exception table for exception handling
+ *
+ * @author hanzhang
+ */
 class YuExceptionTable(val exceptionTable: ArrayList<CodeAttribute.ExceptionTableItem>, constantPool: YuConstantPool) {
     val exceptionHandlers = ArrayList<ExceptionHandler>()
 

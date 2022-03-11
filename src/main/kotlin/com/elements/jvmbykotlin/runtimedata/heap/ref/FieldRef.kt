@@ -5,6 +5,11 @@ import com.elements.jvmbykotlin.runtimedata.heap.YuClass
 import com.elements.jvmbykotlin.runtimedata.heap.YuConstantPool
 import com.elements.jvmbykotlin.runtimedata.heap.YuField
 
+/**
+ * Field reference
+ *
+ * @author hanzhang
+ */
 class FieldRef(
     yuConstantPool: YuConstantPool,
     className: String,

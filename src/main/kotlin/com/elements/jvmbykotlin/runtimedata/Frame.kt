@@ -3,7 +3,10 @@ package com.elements.jvmbykotlin.runtimedata
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
 /**
+ * Frame in Java stack, each method has a frame, contain local variable, operand stack and so on
  * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.6">Frames</a>
+ *
+ * @author hanzhang
  */
 class Frame(val thread: YuThread, val method: YuMethod) {
     var lowerFrame: Frame? = null

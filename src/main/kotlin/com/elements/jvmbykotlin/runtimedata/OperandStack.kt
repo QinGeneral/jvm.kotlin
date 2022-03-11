@@ -4,10 +4,13 @@ import com.elements.jvmbykotlin.runtimedata.heap.YuObject
 import java.util.*
 
 /**
+ * Operand stack in Java stack, for method instruction execution
  * Refer to <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.6.2">Operand Stacks</a>
  *
  * @param maxStack depth of the operand stack depends on method,
  * determined at compile time and included in the class file data for each method.
+ *
+ * @author hanzhang
  */
 class OperandStack(val maxStack: Int) {
     val slots: Stack<Slot> = Stack()

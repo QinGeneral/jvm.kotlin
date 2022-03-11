@@ -1,5 +1,10 @@
 package com.elements.jvmbykotlin.runtimedata.heap
 
+/**
+ * Base reference
+ *
+ * @author hanzhang
+ */
 open class SymRef(
     val yuConstantPool: YuConstantPool,
     val className: String,

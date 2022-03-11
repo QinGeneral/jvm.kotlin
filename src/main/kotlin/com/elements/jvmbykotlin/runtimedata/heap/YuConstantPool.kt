@@ -5,6 +5,11 @@ import com.elements.jvmbykotlin.runtimedata.heap.ref.FieldRef
 import com.elements.jvmbykotlin.runtimedata.heap.ref.InterfaceMethodRef
 import com.elements.jvmbykotlin.runtimedata.heap.ref.MethodRef
 
+/**
+ * Java constant pool, which filed ref, method ref is resolved
+ *
+ * @author hanzhang
+ */
 class YuConstantPool(val yuClass: YuClass, constantPool: ConstantPool) {
     val constants: MutableMap<Int, Any> = HashMap()
 

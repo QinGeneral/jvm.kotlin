@@ -6,6 +6,11 @@ import com.elements.jvmbykotlin.classfile.entity.attribute.CodeAttribute
 import com.elements.jvmbykotlin.classfile.entity.attribute.LineNumberTableAttribute
 import java.lang.IllegalArgumentException
 
+/**
+ * Java method
+ *
+ * @author hanzhang
+ */
 open class YuMethod(yuClass: YuClass, memberInfo: MemberInfo, attributes: CodeAttribute?) :
     ClassMember(yuClass, memberInfo) {
     var maxStack: Int = 0

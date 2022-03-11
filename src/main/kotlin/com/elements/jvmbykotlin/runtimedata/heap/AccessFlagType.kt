@@ -1,5 +1,10 @@
 package com.elements.jvmbykotlin.runtimedata.heap
 
+/**
+ * Access flag for class, field, method
+ *
+ * @author hanzhang
+ */
 enum class AccessFlagType(val value: Int) {
     // not assigned
     ACC_NOT_DEFINE(0x0000),

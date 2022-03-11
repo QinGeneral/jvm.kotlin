@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.runtimedata.heap
 
 import com.elements.jvmbykotlin.classfile.entity.MemberInfo
 
+/**
+ * Base class for field and method
+ *
+ * @author hanzhang
+ */
 open class ClassMember(val yuClass: YuClass, memberInfo: MemberInfo) {
     var accessFlags: Int
     var name: String

@@ -6,6 +6,11 @@ import com.elements.jvmbykotlin.classpath.ClassReadResult
 import com.elements.jvmbykotlin.classpath.Classpath
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
+/**
+ * Java class loader, load byte code to run time class
+ *
+ * @author hanzhang
+ */
 class YuClassLoader(
     val classPath: Classpath,
     val isShowLog: Boolean

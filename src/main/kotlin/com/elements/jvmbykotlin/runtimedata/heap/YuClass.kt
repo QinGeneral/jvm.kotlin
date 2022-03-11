@@ -3,6 +3,11 @@ package com.elements.jvmbykotlin.runtimedata.heap
 import com.elements.jvmbykotlin.classfile.ClassFile
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
+/**
+ * Java class in run time
+ *
+ * @author hanzhang
+ */
 open class YuClass() {
     var accessFlags: Int = 0
     var name: String = ""

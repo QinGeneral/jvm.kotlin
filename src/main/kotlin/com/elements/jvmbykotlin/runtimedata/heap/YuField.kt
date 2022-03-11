@@ -3,10 +3,9 @@ package com.elements.jvmbykotlin.runtimedata.heap
 import com.elements.jvmbykotlin.classfile.entity.FieldInfo
 
 /**
- * 字段
+ * Java field
  *
  * @author hanzhang
- * @since 2022-02-26
  */
 class YuField(yuClass: YuClass, fieldInfo: FieldInfo) : ClassMember(yuClass, fieldInfo) {
     var slotId: Int = 0

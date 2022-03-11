@@ -5,6 +5,11 @@ import com.elements.jvmbykotlin.runtimedata.heap.YuClass
 import com.elements.jvmbykotlin.runtimedata.heap.YuConstantPool
 import com.elements.jvmbykotlin.runtimedata.heap.YuMethod
 
+/**
+ * Interface method reference
+ *
+ * @author hanzhang
+ */
 class InterfaceMethodRef(
     yuConstantPool: YuConstantPool,
     className: String,

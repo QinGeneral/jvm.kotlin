@@ -1,5 +1,10 @@
 package com.elements.jvmbykotlin.runtimedata.heap
 
+/**
+ * Constant tool
+ *
+ * @author hanzhang
+ */
 object Constants {
     val PRIMITIVE_TYPES = mapOf(
         "void" to "V",

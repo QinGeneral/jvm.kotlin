@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.runtimedata
 
 import java.util.*
 
+/**
+ * Java thread, which have pc and frame stack to execute code
+ *
+ * @author hanzhang
+ */
 class YuThread(
 ) {
     /**

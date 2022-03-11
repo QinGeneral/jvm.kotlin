@@ -2,6 +2,11 @@ package com.elements.jvmbykotlin.runtimedata.heap
 
 import com.elements.jvmbykotlin.runtimedata.LocalVariable
 
+/**
+ * Java object
+ *
+ * @author hanzhang
+ */
 open class YuObject(open val yuClass: YuClass) {
     var fields: LocalVariable = LocalVariable()
     var extra: Any? = null
