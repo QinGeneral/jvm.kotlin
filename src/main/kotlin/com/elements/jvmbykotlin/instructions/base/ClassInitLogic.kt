@@ -23,10 +23,10 @@ object ClassInitLogic {
     }
 
     /**
-     * invoke clinit method
+     * schedule to run class initialization method
      *
-     * @param yuThread current thread
-     * @param yuClass current class
+     * @param yuThread on this thread
+     * @param yuClass initialize this class
      */
     private fun scheduleClinit(yuThread: YuThread, yuClass: YuClass) {
         val clinit = yuClass.getClinitMethod()

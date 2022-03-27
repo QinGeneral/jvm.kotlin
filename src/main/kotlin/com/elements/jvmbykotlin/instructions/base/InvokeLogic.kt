@@ -16,6 +16,7 @@ object InvokeLogic {
         val argSlotCount = method.argSlotCount
         if (argSlotCount > 0) {
             for (i in (argSlotCount - 1) downTo 0) {
+                // arguments for the method call are prepared in the operand stack
                 val slot = invokeFrame.operandStack.popSlot()
                 nextFrame.localVariable.setSlot(i, slot)
             }

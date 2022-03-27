@@ -20,6 +20,9 @@ import com.elements.jvmbykotlin.instructions.stores.*
  * @author hanzhang
  */
 object InstructionFactory {
+    /**
+     * @param opcode operation code
+     */
     fun create(opcode: Int): Instruction {
         when (opcode) {
             0x00 ->
